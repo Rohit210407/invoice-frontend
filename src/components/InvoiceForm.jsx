@@ -433,11 +433,22 @@ const InvoiceForm = () => {
               <input
                 id="taxInput"
                 type="number"
+                min="0"
+                max="100"
                 className="form-control w-50 text-end"
                 value={invoiceData.tax}
-                onChange={(e) =>
-                  setInvoiceData((prev) => ({ ...prev, tax: e.target.value }))
-                }
+                onChange={(e) => {
+                  let value = e.target.value;
+                  if (value !== "") {
+                    const numValue = Number(value);
+                    if (numValue < 0) {
+                      value = "0";
+                    } else if (numValue > 100) {
+                      value = "100";
+                    }
+                  }
+                  setInvoiceData((prev) => ({ ...prev, tax: value }));
+                }}
               />
             </div>
             <div className="d-flex justify-content-between">
