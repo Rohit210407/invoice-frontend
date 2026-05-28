@@ -1,19 +1,37 @@
-/* template2.css */
+/* Template2 Modern Tech Overrides */
+
+.template2 {
+    font-family: 'Outfit', 'Plus Jakarta Sans', -apple-system, sans-serif;
+    color: #374151;
+}
+
 .template2-wrapper {
-    background-color: #ffffff;
-    font-size: 0.95rem;
+    box-sizing: border-box;
 }
 
-.notes-section {
-    background-color: #f0fdf4;
-    border-top: 3px solid #22c55e;
+.template2 .table tbody tr {
+    transition: background-color 0.2s ease;
 }
 
-.template2 .company-title {
-    color: #198754;
+.template2 .table tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.01) !important;
 }
 
-.template2 .template2-table-header {
-    background-color: #198754 !important;
-    color: white !important;
+/* Card shape styling */
+.rounded-4 {
+    border-radius: 16px !important;
+}
+
+.tracking-wider {
+    letter-spacing: 0.06em;
+}
+
+@media print {
+    .template2 {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
 }

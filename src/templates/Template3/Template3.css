@@ -1,31 +1,43 @@
-.template3-container {
-    max-width: 800px;
+/* Template3 Minimalist Editorial Styles */
+
+.template3 {
+    font-family: 'Playfair Display', Georgia, Cambria, "Times New Roman", Times, serif;
+    color: #111827;
 }
 
-.template3-heading {
-    color: #8a3ff3;
-    font-size: 2rem;
-    font-weight: bold;
+/* Editorial fonts */
+.editorial-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
 }
 
-.template3-subheading {
-    color: #8a3ff3;
+.editorial-font {
+    font-family: 'Playfair Display', Georgia, serif;
 }
 
-.template3-bill-box {
-    background-color: #f5f0ff;
+.italic {
+    font-style: italic;
 }
 
-.template3-table-header {
-    background-color: #8a3ff3 !important;
-    color: white !important;
+.tracking-wider {
+    letter-spacing: 0.08em;
 }
 
-.template3-total-box {
-    width: 100%;
-    max-width: 300px;
+/* Fine border accents */
+.template3 .border-bottom-subtle {
+    border-bottom: 1px solid #f3f4f6 !important;
 }
 
-.template3-total,.template3 .company-title {
-    color: #8a3ff3;
+.template3 .table tbody tr:hover {
+    background-color: #fafafa !important;
+}
+
+@media print {
+    .template3 {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
 }

@@ -8,145 +8,138 @@ const Template1 = ({ data }) => {
   const taxAmount = (subtotal * parseFloat(data.tax || 0)) / 100;
   const total = subtotal + taxAmount;
 
+  // Generate dynamic QR Code pointing to payment link or fallbacks
+  const qrData = data.paymentLink || (data.id ? `${window.location.origin}/preview` : "https://github.com/Rohit210407");
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}&color=111827&bgcolor=ffffff`;
+
   return (
-    <div className="template1 border rounded mx-auto my-4 px-2 px-sm-4 py-3 w-800">
-      {/* Header Section */}
-      <div className="row mb-4">
-        <div className="col-md-6 mb-3 mb-md-0">
-          {data.companyLogo && (
-            <div className="mb-2">
-              <img src={data.companyLogo} alt="Company Logo" width={98} />
-            </div>
+    <div className="template1 mx-auto my-4 p-5 w-800 bg-white shadow-sm border border-light">
+      {/* Top Header Row: Logo on Left, QR Code on Right */}
+      <div className="d-flex justify-content-between align-items-start mb-4">
+        <div>
+          {data.companyLogo ? (
+            <img 
+              src={data.companyLogo} 
+              alt="Company Logo" 
+              className="mb-2" 
+              style={{ maxHeight: "75px", maxWidth: "220px", objectFit: "contain" }} 
+            />
+          ) : (
+            <h1 className="fw-black m-0 text-uppercase tracking-tight" style={{ fontSize: "32px", color: "#111827" }}>
+              SmartInvoice
+            </h1>
           )}
-          <h2 className="mb-1 company-title" style={{ color: data.themeColor || "#000" }}>{data.companyName}</h2>
-          <p className="mb-1">{data.companyAddress}</p>
-          <p className="mb-0">Phone: {data.companyPhone}</p>
+          <p className="small text-uppercase tracking-widest text-muted fw-bold mt-1 mb-0" style={{ fontSize: "10px" }}>
+            Printable Invoice
+          </p>
         </div>
-        <div className="col-md-6 text-start text-md-end">
-          <h1 className="mb-2 invoice-title" style={{ color: data.themeColor || "#ff6600" }}>Invoice</h1>
-          <div className="d-flex flex-column flex-md-row justify-content-md-end gap-2 gap-md-4">
-            <div className="w-100 w-md-50 mb-3 mb-md-0">
-              <p className="mb-1">
-                <strong>Invoice#:</strong> {data.invoiceNumber}
-              </p>
-              <p className="mb-1">
-                <strong>Invoice Date:</strong> {data.invoiceDate}
-              </p>
-              <p className="mb-1">
-                <strong>Due Date:</strong> {data.paymentDate}
-              </p>
-            </div>
-          </div>
+        <div>
+          <img 
+            src={qrCodeUrl} 
+            alt="Scan to pay / view" 
+            style={{ width: "90px", height: "90px", border: "1px solid #e5e7eb", padding: "4px", borderRadius: "8px", backgroundColor: "#fff" }} 
+          />
         </div>
       </div>
 
-      <hr className="my-3 orange-border" style={{ borderColor: data.themeColor || "#ff6600", opacity: 1, borderWidth: "2px" }} />
+      {/* Sender Company Info Block (Matches layout) */}
+      <div className="row text-secondary mb-4" style={{ fontSize: "12px", lineHeight: "1.6" }}>
+        <div className="col-6">
+          <p className="mb-1"><strong>Company:</strong> <span className="text-dark">{data.companyName || "N/A"}</span></p>
+          <p className="mb-1"><strong>Address:</strong> <span className="text-dark">{data.companyAddress || "N/A"}</span></p>
+          <p className="mb-1"><strong>Sender Name:</strong> <span className="text-dark">{data.companyName || "N/A"}</span></p>
+        </div>
+        <div className="col-6 text-md-end text-start">
+          <p className="mb-1"><strong>Telephone/E-mail:</strong> <span className="text-dark">{data.companyPhone || "N/A"}</span></p>
+          <p className="mb-1"><strong>Invoice Date:</strong> <span className="text-dark">{data.invoiceDate || "N/A"}</span></p>
+          <p className="mb-0"><strong>Due Date:</strong> <span className="text-dark fw-bold">{data.paymentDate || "N/A"}</span></p>
+        </div>
+      </div>
 
-      {/* Billing Section */}
-      <div className="row g-3 mb-4">
-        {data.shippingName && data.shippingPhone && data.shippingAddress && (
-          <div className="col-md-6">
-            <div className="p-3 rounded h-100 billing-box">
-              <h3 className="mb-2 billing-title">Shipped To</h3>
-              <p className="mb-1">
-                <strong>{data.shippingName}</strong>
-              </p>
-              <p className="mb-1">{data.shippingAddress}</p>
-              <p className="mb-0">Phone: {data.shippingPhone}</p>
-            </div>
-          </div>
-        )}
-        <div className="col-md-6">
-          <div className="p-3 rounded h-100 billing-box">
-            <h3 className="mb-2 billing-title">Billed to</h3>
-            <p className="mb-1">
-              <strong>{data.billingName}</strong>
-            </p>
-            <p className="mb-1">{data.billingAddress}</p>
-            <p className="mb-0">Phone: {data.billingPhone}</p>
-          </div>
+      <hr className="divider-line my-4" />
+
+      {/* Bill To & Invoice Meta Section */}
+      <div className="row mb-5" style={{ fontSize: "13px", lineHeight: "1.7" }}>
+        <div className="col-6">
+          <h6 className="fw-bold text-dark text-uppercase tracking-wider mb-2" style={{ fontSize: "11px" }}>Send To</h6>
+          <p className="mb-1"><strong>Receiver Name:</strong> <span className="text-dark fw-bold">{data.billingName || "N/A"}</span></p>
+          <p className="mb-1"><strong>Address:</strong> <span className="text-dark">{data.billingAddress || "N/A"}</span></p>
+          <p className="mb-0"><strong>Telephone/E-mail:</strong> <span className="text-dark">{data.billingPhone || "N/A"}</span></p>
+        </div>
+        <div className="col-6 text-md-end text-start">
+          <h6 className="fw-bold text-dark text-uppercase tracking-wider mb-2" style={{ fontSize: "11px" }}>Invoice Details</h6>
+          <p className="mb-1"><strong>Invoice Number:</strong> <span className="text-dark fw-bold">{data.invoiceNumber || "N/A"}</span></p>
+          <p className="mb-1"><strong>Terms of Payment:</strong> <span className="text-dark">Due on Receipt</span></p>
+          <p className="mb-0"><strong>Status:</strong> <span className="badge bg-light text-dark border px-2 py-1 rounded">{data.status || "Draft"}</span></p>
         </div>
       </div>
 
       {/* Items Table */}
       <div className="mb-4">
-        <div className="table-responsive">
-          <table className="table table-bordered">
-            <thead>
-              <tr>
-                <th className="p-2 table-header" style={{ backgroundColor: data.themeColor || "#ff6600", color: "#fff" }}>Item #/Item description</th>
-                <th className="p-2 text-center table-header" style={{ backgroundColor: data.themeColor || "#ff6600", color: "#fff" }}>Qty.</th>
-                <th className="p-2 text-end table-header" style={{ backgroundColor: data.themeColor || "#ff6600", color: "#fff" }}>Rate</th>
-                <th className="p-2 text-end table-header" style={{ backgroundColor: data.themeColor || "#ff6600", color: "#fff" }}>Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.items.map((item, index) => (
+        <table className="table table-bordered printable-table align-middle" style={{ fontSize: "13px" }}>
+          <thead className="table-light-header">
+            <tr>
+              <th className="p-3 text-uppercase fw-bold text-secondary text-start" style={{ fontSize: "11px", letterSpacing: "0.05em" }}>Description</th>
+              <th className="p-3 text-uppercase fw-bold text-secondary text-center" style={{ width: "10%", fontSize: "11px", letterSpacing: "0.05em" }}>Quantity</th>
+              <th className="p-3 text-uppercase fw-bold text-secondary text-end" style={{ width: "20%", fontSize: "11px", letterSpacing: "0.05em" }}>Unit Price</th>
+              <th className="p-3 text-uppercase fw-bold text-secondary text-end" style={{ width: "20%", fontSize: "11px", letterSpacing: "0.05em" }}>Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.items && data.items.length > 0 ? (
+              data.items.map((item, index) => (
                 <tr key={index}>
-                  <td className="p-2">{item.name}</td>
-                  <td className="p-2 text-center">{item.qty}</td>
-                  <td className="p-2 text-end">₹{item.amount?.toFixed(2)}</td>
-                  <td className="p-2 text-end">
-                    ₹{(item.qty * item.amount).toFixed(2)}
-                  </td>
+                  <td className="p-3 text-dark">{item.name || "Item description"}</td>
+                  <td className="p-3 text-center text-secondary">{item.qty || 0}</td>
+                  <td className="p-3 text-end text-secondary">₹{(item.amount || 0).toFixed(2)}</td>
+                  <td className="p-3 text-end fw-semibold text-dark">₹{((item.qty || 0) * (item.amount || 0)).toFixed(2)}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className="p-3 text-center text-muted">No items added</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
 
       {/* Totals Section */}
-      <div className="mb-4">
-        <div className="d-flex justify-content-end ">
-          <div className="p-3 w-100 totals-box" style={{ maxWidth: "300px" }}>
-            <div className="d-flex justify-content-between mb-2">
-              <span>Sub Total:</span>
-              <span>₹{subtotal.toFixed(2)}</span>
+      <div className="d-flex justify-content-end mb-5">
+        <div className="w-100" style={{ maxWidth: "320px", fontSize: "13px" }}>
+          <div className="d-flex justify-content-between py-2 border-bottom">
+            <span className="text-secondary">Subtotal</span>
+            <span className="fw-semibold text-dark">₹{subtotal.toFixed(2)}</span>
+          </div>
+          {data.tax > 0 && (
+            <div className="d-flex justify-content-between py-2 border-bottom">
+              <span className="text-secondary">Tax ({data.tax}%)</span>
+              <span className="fw-semibold text-dark">₹{taxAmount.toFixed(2)}</span>
             </div>
-            {data.tax > 0 && (
-              <div className="d-flex justify-content-between mb-2">
-                <span>Tax ({data.tax}%):</span>
-                <span>₹{taxAmount.toFixed(2)}</span>
-              </div>
-            )}
-            <div className="d-flex justify-content-between fw-bold total-highlight">
-              <span>Total:</span>
-              <span>₹{total.toFixed(2)}</span>
-            </div>
+          )}
+          <div className="d-flex justify-content-between py-3">
+            <span className="fw-bold text-dark fs-6">Total</span>
+            <span className="fw-bold text-dark fs-6" style={{ color: data.themeColor || "#111827" }}>
+              ₹{total.toFixed(2)}
+            </span>
           </div>
         </div>
       </div>
 
-      {/* Bank Account Details Section */}
-      {(data.accountName || data.accountNumber || data.accountIfscCode) && (
-        <div className="mt-4">
-          <h3 className="mb-2 billing-title">Bank Account Details</h3>
-          {data.accountName && (
-            <p className="mb-1">
-              <strong>Account Holder:</strong> {data.accountName}
-            </p>
-          )}
-          {data.accountNumber && (
-            <p className="mb-1">
-              <strong>Account Number:</strong> {data.accountNumber}
-            </p>
-          )}
-          {data.accountIfscCode && (
-            <p className="mb-0">
-              <strong>IFSC / Branch Code:</strong> {data.accountIfscCode}
-            </p>
-          )}
+      {/* Footer Remarks */}
+      {data.notes && (
+        <div className="mt-4 pt-4 border-top text-muted" style={{ fontSize: "11px" }}>
+          <p className="fw-bold text-uppercase text-secondary tracking-wider mb-1" style={{ fontSize: "9px" }}>Remarks / Notes</p>
+          <p className="m-0" style={{ whiteSpace: "pre-line" }}>{data.notes}</p>
         </div>
       )}
 
-      {/* Notes Section */}
-      {data.notes && (
-        <div className="mt-4">
-          <h3 className="mb-2 billing-title">Remarks</h3>
-          <p className="mb-0">{data.notes}</p>
-        </div>
-      )}
+      {/* Brand logo at bottom center (Matches footer) */}
+      <div className="text-center mt-5 pt-3 border-top-0">
+        <p className="text-muted fw-bold mb-0" style={{ letterSpacing: "-0.5px", fontSize: "14px", opacity: 0.7 }}>
+          <span style={{ color: data.themeColor || "#6366f1" }}>●</span> SmartInvoice
+        </p>
+      </div>
     </div>
   );
 };

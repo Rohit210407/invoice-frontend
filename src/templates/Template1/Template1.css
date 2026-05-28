@@ -1,45 +1,40 @@
-/* template1.css */
+/* Template1 Reference Styling */
 
-.w-800 {
-    max-width: 800px;
+.template1 {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #1f2937;
 }
 
-.company-title {
-    font-size: 18px;
-    font-weight: bold;
+.divider-line {
+    border: 0;
+    border-top: 2px solid #111827 !important;
+    opacity: 1 !important;
 }
 
-.invoice-title {
-    color: #ea580c;
-    font-size: 28px;
-    font-weight: bold;
+/* Printable Table styling exactly like reference */
+.printable-table {
+    border: 1px solid #111827 !important;
+    border-collapse: collapse;
 }
 
-.billing-title {
-    color: #ea580c;
-    font-size: 16px;
-    font-weight: bold;
+.printable-table th {
+    background-color: #f3f4f6 !important;
+    color: #1f2937 !important;
+    border: 1px solid #111827 !important;
+    font-weight: 700;
 }
 
-.orange-border {
-    border-color: #ea580c !important;
+.printable-table td {
+    border: 1px solid #111827 !important;
 }
 
-.billing-box {
-    background-color: #fff7ed;
-}
-
-.table-header {
-    background-color: #ea580c !important;
-    color: white !important;
-}
-
-.totals-box {
-    font-size: 16px;
-    font-weight: bold;
-    background-color: #fff7ed;
-}
-
-.total-highlight,.template1 .company-title {
-    color: #ea580c;
+/* Responsive adjustments */
+@media print {
+    .template1 {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+    }
 }

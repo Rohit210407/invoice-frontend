@@ -1,5 +1,6 @@
 export const formatInvoiceData = (invoiceData) => {
     const {
+        id = "",
         title,
         company = {},
         invoice = {},
@@ -9,7 +10,8 @@ export const formatInvoiceData = (invoiceData) => {
         tax = 0,
         notes = "",
         items = [],
-        logo = ""
+        logo = "",
+        paymentLink = ""
     } = invoiceData || {};
 
     const currencySymbol = "₹";
@@ -18,6 +20,7 @@ export const formatInvoiceData = (invoiceData) => {
     const total = subtotal + taxAmount;
 
     return {
+        id,
         title,
         companyName: company.name,
         companyAddress: company.address,
@@ -46,7 +49,8 @@ export const formatInvoiceData = (invoiceData) => {
         notes,
         subtotal,
         taxAmount,
-        total
+        total,
+        paymentLink
     };
 };
 
