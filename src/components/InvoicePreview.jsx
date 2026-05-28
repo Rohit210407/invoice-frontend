@@ -8,7 +8,13 @@ const InvoicePreview = forwardRef(({ invoiceData, template }, ref) => {
   // Serialize raw invoice data for public sharing and auto-download on scan
   let qrCodeUrl = "";
   try {
-    const rawString = JSON.stringify(invoiceData);
+    // CRITICAL: Strip large base64 image logo and thumbnail strings to keep the QR payload lightweight and readable!
+    const sanitizedData = {
+      ...invoiceData,
+      logo: "", 
+      thumbnailUrl: ""
+    };
+    const rawString = JSON.stringify(sanitizedData);
     const serialized = btoa(unescape(encodeURIComponent(rawString)));
     const origin = typeof window !== "undefined" ? window.location.origin : "https://smartinvoice.vercel.app";
     const qrData = `${origin}/preview?data=${serialized}&download=true`;
