@@ -31,10 +31,23 @@ const LandingPage = () => {
                 <div className="container py-5 d-flex flex-column justify-content-center" style={{ minHeight: '85vh' }}>
                     <div className="row py-lg-5">
                         <div className="col-lg-9 col-md-10 mx-auto">
-                            <h1 className="display-3 fw-bold mb-4">
+                            <div className="d-flex justify-content-center mb-4">
+                                <Logo 
+                                    height={120} 
+                                    width={120} 
+                                    className="hero-logo img-fluid"
+                                    style={{
+                                        filter: "drop-shadow(0 15px 35px rgba(99, 102, 241, 0.5))",
+                                        borderRadius: "28px",
+                                        animation: "logoFloat 5s ease-in-out infinite",
+                                        border: "1px solid rgba(255, 255, 255, 0.2)"
+                                    }}
+                                />
+                            </div>
+                            <h1 className="display-3 fw-bold mb-3 text-gradient-glow" style={{ letterSpacing: "-1.5px" }}>
                                 SmartInvoice
                             </h1>
-                            <h3 className="mb-5 text-white fw-normal">
+                            <h3 className="mb-5 text-white fw-normal" style={{ letterSpacing: "-0.5px" }}>
                                 Effortless Invoicing. Professional Results.
                             </h3>
                             <p>
@@ -255,8 +268,16 @@ const LandingPage = () => {
             {/* Footer: Copyright and social media links */}
             <footer className="py-5 bg-dark text-white-50">
                 <div className="container text-center">
-                    <Logo />
-                    <p className="text-white fw-bold mt-2">SmartInvoice</p>
+                    <Logo 
+                        height={60} 
+                        width={60} 
+                        style={{
+                            borderRadius: "16px",
+                            filter: "drop-shadow(0 4px 15px rgba(99, 102, 241, 0.3))",
+                            border: "1px solid rgba(255, 255, 255, 0.1)"
+                        }}
+                    />
+                    <p className="text-white fw-bold mt-3 fs-5" style={{ letterSpacing: "-0.5px" }}>SmartInvoice</p>
                     <p className="mb-0">
                         &copy; {new Date().getFullYear()} SmartInvoice. All Rights Reserved.
                     </p>

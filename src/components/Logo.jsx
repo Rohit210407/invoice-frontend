@@ -1,8 +1,15 @@
 import { assets } from "../assets/assets.js";
 
-const Logo = () => {
+const Logo = ({ height = 48, width = 48, className = "logo", style }) => {
   return (
-    <img className="logo" src={assets.logo} alt="logo" height={48} width={48} />
+    <img 
+      className={className} 
+      src={assets.logo} 
+      alt="SmartInvoice logo" 
+      height={height} 
+      width={width} 
+      style={style}
+    />
   );
 };
 

@@ -1,13 +1,32 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Shield, Zap, BarChart, Smartphone, Globe } from 'lucide-react';
+import Logo from '../components/Logo.jsx';
 
 const AboutPage = () => {
   return (
     <div className="container-fluid bg-light min-vh-100 py-5">
       <div className="container bg-white shadow-sm rounded p-5">
         <div className="text-center mb-5">
-          <h1 className="display-4 fw-bold text-primary mb-3">About SmartInvoice</h1>
+          <div className="d-flex justify-content-center mb-3">
+            <Logo 
+              height={90} 
+              width={90} 
+              style={{
+                filter: "drop-shadow(0 10px 20px rgba(99, 102, 241, 0.3))",
+                borderRadius: "20px",
+                border: "1px solid rgba(0, 0, 0, 0.05)"
+              }}
+            />
+          </div>
+          <h1 className="display-4 fw-bold mb-3" style={{ 
+            background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            fontWeight: "800"
+          }}>
+            About SmartInvoice
+          </h1>
           <p className="lead text-muted">Your all-in-one platform for professional invoicing and financial tracking.</p>
         </div>
 

@@ -31,10 +31,25 @@ const Menubar = () => {
       <div className="container py-2">
         {/* Brand logo and name */}
         <Link className="navbar-brand d-flex align-items-center" to="/">
-          <Logo />
+          <Logo 
+            height={42} 
+            width={42} 
+            style={{ 
+              transition: "transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+              borderRadius: "12px",
+              filter: "drop-shadow(0 2px 8px rgba(99, 102, 241, 0.2))"
+            }} 
+            className="logo-hover" 
+          />
           <span
-            className="fw-bolder fs-4 mx-3"
-            style={{ letterSpacing: "-0.5px", color: "#0D6EFDB2" }}
+            className="fs-4 mx-3"
+            style={{ 
+              letterSpacing: "-0.5px", 
+              background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontWeight: "800"
+            }}
           >
             SmartInvoice
           </span>
