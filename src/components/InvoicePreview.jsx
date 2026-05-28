@@ -5,6 +5,21 @@ import { templateComponents } from "../utils/invoiceTemplates.js";
 const InvoicePreview = forwardRef(({ invoiceData, template }, ref) => {
   const formattedData = formatInvoiceData(invoiceData);
 
+  // Serialize raw invoice data for public sharing and auto-download on scan
+  let qrCodeUrl = "";
+  try {
+    const rawString = JSON.stringify(invoiceData);
+    const serialized = btoa(unescape(encodeURIComponent(rawString)));
+    const origin = typeof window !== "undefined" ? window.location.origin : "https://smartinvoice.vercel.app";
+    const qrData = `${origin}/preview?data=${serialized}&download=true`;
+    qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}&color=111827&bgcolor=ffffff`;
+  } catch (err) {
+    console.error("Failed to generate QR Code URL", err);
+  }
+
+  // Inject qrCodeUrl into formatted data
+  formattedData.qrCodeUrl = qrCodeUrl;
+
   const SelectedTemplate =
     templateComponents[template] || templateComponents["template1"];
 

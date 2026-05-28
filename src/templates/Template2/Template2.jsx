@@ -12,9 +12,7 @@ const Template2 = ({ data }) => {
   const lightBg = `${themeColor}0a`; // ~4% opacity
   const borderBg = `${themeColor}26`; // ~15% opacity
 
-  // Generate dynamic QR Code
-  const qrData = data.paymentLink || (data.id ? `${window.location.origin}/preview` : "https://github.com/Rohit210407");
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}&color=${themeColor.replace("#", "")}`;
+  const qrCodeUrl = data.qrCodeUrl;
 
   return (
     <div className="template2 mx-auto my-4 p-5 w-800 bg-white shadow-sm rounded-4 border border-light">

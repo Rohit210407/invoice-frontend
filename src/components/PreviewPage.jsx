@@ -68,6 +68,36 @@ const PreviewPage = () => {
   };
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const serializedData = params.get("data");
+    const autoDownload = params.get("download");
+
+    if (serializedData) {
+      try {
+        const decoded = JSON.parse(decodeURIComponent(escape(atob(serializedData))));
+        setInvoiceData(decoded);
+
+        if (autoDownload === "true") {
+          toast.success("QR Code scanned! Preparing your invoice download...");
+          setTimeout(() => {
+            // Trigger pdf download button
+            const downloadBtn = document.querySelector(".btn-success");
+            if (downloadBtn) {
+              downloadBtn.click();
+            }
+          }, 1500);
+        }
+      } catch (err) {
+        console.error("Failed to decode QR data", err);
+        toast.error("Invalid QR Code link.");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("data")) return; // Skip redirect if loading from QR Code link
+
     if (!invoiceData || !invoiceData.items?.length) {
       toast.error("Invoice data is missing.");
       navigate("/");

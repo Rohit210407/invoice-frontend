@@ -8,9 +8,7 @@ const Template1 = ({ data }) => {
   const taxAmount = (subtotal * parseFloat(data.tax || 0)) / 100;
   const total = subtotal + taxAmount;
 
-  // Generate dynamic QR Code pointing to payment link or fallbacks
-  const qrData = data.paymentLink || (data.id ? `${window.location.origin}/preview` : "https://github.com/Rohit210407");
-  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrData)}&color=111827&bgcolor=ffffff`;
+  const qrCodeUrl = data.qrCodeUrl;
 
   return (
     <div className="template1 mx-auto my-4 p-5 w-800 bg-white shadow-sm border border-light">
