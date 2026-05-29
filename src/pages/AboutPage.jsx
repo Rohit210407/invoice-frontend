@@ -1,144 +1,197 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle, Shield, Zap, BarChart, Smartphone, Globe } from 'lucide-react';
+import { CheckCircle, Shield, Zap, BarChart, Smartphone, Globe, ArrowRight } from 'lucide-react';
 import Logo from '../components/Logo.jsx';
+import '../App.css';
 
 const AboutPage = () => {
   return (
-    <div className="container-fluid bg-light min-vh-100 py-5">
-      <div className="container bg-white shadow-sm rounded p-5">
+    <div className="about-page-wrapper py-5 px-3 px-md-0">
+      <div className="container about-glass-card p-4 p-md-5 my-4">
+        {/* Header Section */}
         <div className="text-center mb-5">
-          <div className="d-flex justify-content-center mb-3">
+          <div className="d-flex justify-content-center mb-4">
             <Logo 
-              height={90} 
-              width={90} 
+              height={100} 
+              width={100} 
               style={{
-                filter: "drop-shadow(0 10px 20px rgba(99, 102, 241, 0.3))",
-                borderRadius: "20px",
-                border: "1px solid rgba(0, 0, 0, 0.05)"
+                filter: "drop-shadow(0 0 25px rgba(99, 102, 241, 0.45))",
+                borderRadius: "22px",
+                border: "1.5px solid rgba(255, 255, 255, 0.15)"
               }}
             />
           </div>
-          <h1 className="display-4 fw-bold mb-3" style={{ 
-            background: "linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%)",
+          <h1 className="display-4 fw-extrabold mb-3" style={{ 
+            background: "linear-gradient(135deg, #818cf8 0%, #c084fc 50%, #f472b6 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            fontWeight: "800"
+            fontWeight: "900",
+            letterSpacing: "-1px"
           }}>
             About SmartInvoice
           </h1>
-          <p className="lead text-muted">Your all-in-one platform for professional invoicing and financial tracking.</p>
+          <p className="lead fs-5" style={{ color: "#9ca3af", maxWidth: "600px", margin: "0 auto" }}>
+            Your all-in-one platform for professional invoicing and financial tracking.
+          </p>
         </div>
 
-        <div className="row mb-5">
-          <div className="col-lg-6 mb-4 mb-lg-0">
-            <h2 className="h3 fw-bold mb-3">What is SmartInvoice?</h2>
-            <p className="fs-5 text-secondary">
+        {/* What is SmartInvoice Section */}
+        <div className="row align-items-center mb-5 pb-4">
+          <div className="col-lg-6 mb-5 mb-lg-0 pe-lg-5">
+            <div className="badge px-3 py-2 rounded-pill mb-3" style={{ background: "rgba(99, 102, 241, 0.15)", color: "#818cf8", border: "1px solid rgba(99, 102, 241, 0.25)", fontSize: "14px", fontWeight: "600" }}>
+              Next-Gen Invoicing
+            </div>
+            <h2 className="h2 fw-bold mb-4 text-white" style={{ letterSpacing: "-0.5px" }}>What is SmartInvoice?</h2>
+            <p className="fs-6 text-secondary mb-4" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "1.1rem" }}>
               SmartInvoice is a modern, cloud-based B2B SaaS platform designed specifically for freelancers, agencies, and small to medium-sized enterprises (SMEs). We eliminate the hassle of spreadsheets and manual calculations by providing an intuitive interface to generate, track, and manage your invoices.
             </p>
-            <p className="fs-5 text-secondary">
+            <p className="fs-6 text-secondary" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "1.1rem" }}>
               Our goal is to help you get paid faster, maintain a professional image with your clients, and keep your finances organized in one secure place.
             </p>
           </div>
-          <div className="col-lg-6 bg-light rounded p-4 d-flex align-items-center justify-content-center">
-            <img src="https://placehold.co/500x300/0d6efd/ffffff?text=SmartInvoice+Platform" alt="Platform Overview" className="img-fluid rounded shadow-sm" />
+          <div className="col-lg-6 d-flex align-items-center justify-content-center">
+            <div className="about-mockup-container p-1 w-100">
+              <img 
+                src="/dashboard-mockup.png" 
+                alt="SmartInvoice Platform Overview" 
+                className="img-fluid rounded" 
+                style={{ display: "block", width: "100%", height: "auto" }}
+              />
+            </div>
           </div>
         </div>
 
-        <hr className="my-5" />
+        <div className="glass-divider"></div>
 
+        {/* How to Use Section */}
         <div className="text-center mb-5">
-          <h2 className="h3 fw-bold mb-4">How to Use SmartInvoice</h2>
+          <div className="badge px-3 py-2 rounded-pill mb-3" style={{ background: "rgba(168, 85, 247, 0.15)", color: "#c084fc", border: "1px solid rgba(168, 85, 247, 0.25)", fontSize: "14px", fontWeight: "600" }}>
+            Three Simple Steps
+          </div>
+          <h2 className="h2 fw-bold text-white mb-5" style={{ letterSpacing: "-0.5px" }}>How to Use SmartInvoice</h2>
           <div className="row g-4 justify-content-center">
             <div className="col-md-4">
-              <div className="p-4 border rounded h-100 bg-white shadow-sm hover-shadow transition">
-                <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: '60px', height: '60px', fontSize: '24px', fontWeight: 'bold' }}>1</div>
-                <h4 className="fw-bold">Create</h4>
-                <p className="text-muted">Enter your client's details, itemize your services or products, and apply any necessary taxes or discounts instantly.</p>
+              <div className="about-step-node p-5 h-100 d-flex flex-column justify-content-between">
+                <div>
+                  <div className="about-step-badge step-1">1</div>
+                  <h4 className="fw-bold text-white mb-3">Create</h4>
+                  <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                    Enter your client's details, itemize your services or products, and apply any necessary taxes or discounts instantly.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="p-4 border rounded h-100 bg-white shadow-sm hover-shadow transition">
-                <div className="bg-warning text-dark rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: '60px', height: '60px', fontSize: '24px', fontWeight: 'bold' }}>2</div>
-                <h4 className="fw-bold">Customize</h4>
-                <p className="text-muted">Choose from our gallery of professional templates. Add your company logo and select your brand's theme color.</p>
+              <div className="about-step-node p-5 h-100 d-flex flex-column justify-content-between">
+                <div>
+                  <div className="about-step-badge step-2">2</div>
+                  <h4 className="fw-bold text-white mb-3">Customize</h4>
+                  <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                    Choose from our gallery of professional templates. Add your company logo and select your brand's theme color.
+                  </p>
+                </div>
               </div>
             </div>
             <div className="col-md-4">
-              <div className="p-4 border rounded h-100 bg-white shadow-sm hover-shadow transition">
-                <div className="bg-success text-white rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: '60px', height: '60px', fontSize: '24px', fontWeight: 'bold' }}>3</div>
-                <h4 className="fw-bold">Send & Get Paid</h4>
-                <p className="text-muted">Generate a secure Stripe payment link, save the invoice to your dashboard, and email it directly to your client.</p>
+              <div className="about-step-node p-5 h-100 d-flex flex-column justify-content-between">
+                <div>
+                  <div className="about-step-badge step-3">3</div>
+                  <h4 className="fw-bold text-white mb-3">Send & Get Paid</h4>
+                  <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                    Generate a secure Stripe payment link, save the invoice to your dashboard, and email it directly to your client.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
 
-        <hr className="my-5" />
+        <div className="glass-divider"></div>
 
+        {/* Features Section */}
         <div className="mb-5">
-          <h2 className="h3 fw-bold text-center mb-5">Powerful Enterprise Features</h2>
+          <div className="text-center mb-5">
+            <div className="badge px-3 py-2 rounded-pill mb-3" style={{ background: "rgba(236, 72, 153, 0.15)", color: "#f472b6", border: "1px solid rgba(236, 72, 153, 0.25)", fontSize: "14px", fontWeight: "600" }}>
+              Enterprise Grade
+            </div>
+            <h2 className="h2 fw-bold text-white" style={{ letterSpacing: "-0.5px" }}>Powerful Enterprise Features</h2>
+          </div>
           <div className="row g-4">
-            <div className="col-md-6 col-lg-4 d-flex">
-              <div className="d-flex p-3 bg-light rounded w-100">
-                <div className="me-3 text-primary"><Zap size={32} /></div>
-                <div>
-                  <h5 className="fw-bold">Instant Payment Links</h5>
-                  <p className="text-muted small mb-0">Generate secure Stripe checkout links so clients can pay you instantly with credit cards or Apple Pay.</p>
+            <div className="col-md-6 col-lg-4">
+              <div className="about-feature-box">
+                <div className="about-feature-icon icon-blue">
+                  <Zap size={26} />
                 </div>
+                <h5 className="fw-bold text-white mb-3">Instant Payment Links</h5>
+                <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.6" }}>
+                  Generate secure Stripe checkout links so clients can pay you instantly with credit cards or Apple Pay.
+                </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4 d-flex">
-              <div className="d-flex p-3 bg-light rounded w-100">
-                <div className="me-3 text-success"><BarChart size={32} /></div>
-                <div>
-                  <h5 className="fw-bold">Analytics Dashboard</h5>
-                  <p className="text-muted small mb-0">Track your total revenue, outstanding balances, and view interactive charts of your cash flow over time.</p>
+            <div className="col-md-6 col-lg-4">
+              <div className="about-feature-box">
+                <div className="about-feature-icon icon-green">
+                  <BarChart size={26} />
                 </div>
+                <h5 className="fw-bold text-white mb-3">Analytics Dashboard</h5>
+                <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.6" }}>
+                  Track your total revenue, outstanding balances, and view interactive charts of your cash flow over time.
+                </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4 d-flex">
-              <div className="d-flex p-3 bg-light rounded w-100">
-                <div className="me-3 text-warning"><CheckCircle size={32} /></div>
-                <div>
-                  <h5 className="fw-bold">Status Tracking</h5>
-                  <p className="text-muted small mb-0">Never lose track of an invoice. Mark invoices as Draft, Sent, Paid, or Overdue with color-coded badges.</p>
+            <div className="col-md-6 col-lg-4">
+              <div className="about-feature-box">
+                <div className="about-feature-icon icon-purple">
+                  <CheckCircle size={26} />
                 </div>
+                <h5 className="fw-bold text-white mb-3">Status Tracking</h5>
+                <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.6" }}>
+                  Never lose track of an invoice. Mark invoices as Draft, Sent, Paid, or Overdue with color-coded badges.
+                </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4 d-flex">
-              <div className="d-flex p-3 bg-light rounded w-100">
-                <div className="me-3 text-info"><Smartphone size={32} /></div>
-                <div>
-                  <h5 className="fw-bold">PDF Generation</h5>
-                  <p className="text-muted small mb-0">Download pixel-perfect, high-resolution PDF copies of your invoices for your own accounting records.</p>
+            <div className="col-md-6 col-lg-4">
+              <div className="about-feature-box">
+                <div className="about-feature-icon icon-cyan">
+                  <Smartphone size={26} />
                 </div>
+                <h5 className="fw-bold text-white mb-3">PDF Generation</h5>
+                <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.6" }}>
+                  Download pixel-perfect, high-resolution PDF copies of your invoices for your own accounting records.
+                </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4 d-flex">
-              <div className="d-flex p-3 bg-light rounded w-100">
-                <div className="me-3 text-danger"><Shield size={32} /></div>
-                <div>
-                  <h5 className="fw-bold">Secure Cloud Storage</h5>
-                  <p className="text-muted small mb-0">All your invoice data is securely encrypted and backed up in the cloud. Access it anywhere, anytime.</p>
+            <div className="col-md-6 col-lg-4">
+              <div className="about-feature-box">
+                <div className="about-feature-icon icon-pink">
+                  <Shield size={26} />
                 </div>
+                <h5 className="fw-bold text-white mb-3">Secure Cloud Storage</h5>
+                <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.6" }}>
+                  All your invoice data is securely encrypted and backed up in the cloud. Access it anywhere, anytime.
+                </p>
               </div>
             </div>
-            <div className="col-md-6 col-lg-4 d-flex">
-              <div className="d-flex p-3 bg-light rounded w-100">
-                <div className="me-3 text-secondary"><Globe size={32} /></div>
-                <div>
-                  <h5 className="fw-bold">Custom Branding</h5>
-                  <p className="text-muted small mb-0">White-label your invoices by uploading your custom logo and selecting your company's exact brand color.</p>
+            <div className="col-md-6 col-lg-4">
+              <div className="about-feature-box">
+                <div className="about-feature-icon icon-orange">
+                  <Globe size={26} />
                 </div>
+                <h5 className="fw-bold text-white mb-3">Custom Branding</h5>
+                <p className="small mb-0" style={{ color: "#9ca3af", lineHeight: "1.6" }}>
+                  White-label your invoices by uploading your custom logo and selecting your company's exact brand color.
+                </p>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="text-center mt-5 pt-4 border-top">
-          <h3 className="fw-bold mb-3">Ready to transform your billing process?</h3>
-          <Link to="/" className="btn btn-lg btn-primary rounded-pill px-5">Get Started for Free</Link>
+        {/* CTA Footer Section */}
+        <div className="text-center mt-5 pt-5" style={{ borderTop: "1px solid rgba(255, 255, 255, 0.08)" }}>
+          <h3 className="fw-bold text-white mb-4" style={{ letterSpacing: "-0.5px" }}>Ready to transform your billing process?</h3>
+          <Link to="/dashboard" className="btn-premium-cta d-inline-flex align-items-center gap-2">
+            Get Started for Free <ArrowRight size={20} />
+          </Link>
         </div>
       </div>
     </div>
