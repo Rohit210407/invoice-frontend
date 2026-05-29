@@ -86,7 +86,7 @@ const LandingPage = () => {
                                     <div className="landing-step-badge step-1">1</div>
                                 </div>
                                 <div className="card-body p-0">
-                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Enter Details</h5>
+                                    <h5 className="card-title fw-bold mb-3 text-dark fs-5">Enter Details</h5>
                                     <p className="landing-step-desc mb-0">
                                         Quickly fill in your clients information, item descriptions, quantities, and prices. Our intuitive form makes it a breeze.
                                     </p>
@@ -101,7 +101,7 @@ const LandingPage = () => {
                                     <div className="landing-step-badge step-2">2</div>
                                 </div>
                                 <div className="card-body p-0">
-                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Choose Template</h5>
+                                    <h5 className="card-title fw-bold mb-3 text-dark fs-5">Choose Template</h5>
                                     <p className="landing-step-desc mb-0">
                                         Browse our gallery of professionally designed templates. Pick one that matches your brand and style.
                                     </p>
@@ -116,7 +116,7 @@ const LandingPage = () => {
                                     <div className="landing-step-badge step-3">3</div>
                                 </div>
                                 <div className="card-body p-0">
-                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Preview Invoice</h5>
+                                    <h5 className="card-title fw-bold mb-3 text-dark fs-5">Preview Invoice</h5>
                                     <p className="landing-step-desc mb-0">
                                         See exactly how your invoice will look before sending it. Make any last-minute adjustments with ease.
                                     </p>
@@ -131,7 +131,7 @@ const LandingPage = () => {
                                     <div className="landing-step-badge step-4">4</div>
                                 </div>
                                 <div className="card-body p-0">
-                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Download & Save</h5>
+                                    <h5 className="card-title fw-bold mb-3 text-dark fs-5">Download & Save</h5>
                                     <p className="landing-step-desc mb-0">
                                         Download your invoice as a PDF, send it directly via email, or save it for your records and future reference.
                                     </p>
