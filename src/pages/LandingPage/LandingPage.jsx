@@ -87,7 +87,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="card-body p-0">
                                     <h5 className="card-title fw-bold mb-3 text-white fs-5">Enter Details</h5>
-                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                    <p className="landing-step-desc mb-0">
                                         Quickly fill in your clients information, item descriptions, quantities, and prices. Our intuitive form makes it a breeze.
                                     </p>
                                 </div>
@@ -102,7 +102,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="card-body p-0">
                                     <h5 className="card-title fw-bold mb-3 text-white fs-5">Choose Template</h5>
-                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                    <p className="landing-step-desc mb-0">
                                         Browse our gallery of professionally designed templates. Pick one that matches your brand and style.
                                     </p>
                                 </div>
@@ -117,7 +117,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="card-body p-0">
                                     <h5 className="card-title fw-bold mb-3 text-white fs-5">Preview Invoice</h5>
-                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                    <p className="landing-step-desc mb-0">
                                         See exactly how your invoice will look before sending it. Make any last-minute adjustments with ease.
                                     </p>
                                 </div>
@@ -132,7 +132,7 @@ const LandingPage = () => {
                                 </div>
                                 <div className="card-body p-0">
                                     <h5 className="card-title fw-bold mb-3 text-white fs-5">Download & Save</h5>
-                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                    <p className="landing-step-desc mb-0">
                                         Download your invoice as a PDF, send it directly via email, or save it for your records and future reference.
                                     </p>
                                 </div>
@@ -169,7 +169,7 @@ const LandingPage = () => {
                                 Custom Branding
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Easy to fill invoice details</h3>
-                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                 SmartInvoice provides standard data structures that auto-populate default business headers, tax ratios, currencies, and translation properties instantly. No manual typing required.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -199,7 +199,7 @@ const LandingPage = () => {
                                 Live Insights
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Beautiful Dashboard</h3>
-                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                 Gain full financial clarity using automated analytical widgets. View outstanding statements, track unpaid accounts, and auto-convert currencies in one place.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -230,7 +230,7 @@ const LandingPage = () => {
                                 Live Editor
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Invoice Preview with Action Buttons</h3>
-                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                 What you see is exactly what your client gets. View your fully formatted live templates side-by-side with your input configurations instantly.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -260,7 +260,7 @@ const LandingPage = () => {
                                 Direct Dispatch
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Send invoices instantly</h3>
-                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                 Deliver billing statements securely and instantly to clients. Connect email services to send PDF structures or automated checkout statements smoothly.
                             </p>
                             <div className="d-flex flex-column gap-2">
