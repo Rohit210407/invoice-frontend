@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext.jsx";
 
 const InvoiceForm = () => {
-  const { invoiceData, setInvoiceData } = useContext(AppContext);
+  const { invoiceData, setInvoiceData, convertCurrency, userProfile } = useContext(AppContext);
   const handleChange = (section, field, value) => {
     setInvoiceData((prev) => ({
       ...prev,
@@ -111,9 +111,9 @@ const InvoiceForm = () => {
         </div>
       </div>
 
-      {/* BRANDING & STATUS */}
+      {/* BRANDING, CURRENCY & LANGUAGE */}
       <div className="mb-4 row g-3">
-        <div className="col-md-6">
+        <div className="col-md-3">
           <h5>Status</h5>
           <select
             className="form-select"
@@ -126,7 +126,45 @@ const InvoiceForm = () => {
             <option value="Overdue">Overdue</option>
           </select>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-3">
+          <h5>Currency</h5>
+          <select
+            className="form-select"
+            value={invoiceData.currency || "INR"}
+            onChange={(e) => {
+              const selectedCurrency = e.target.value;
+              const rate = convertCurrency(1.0, selectedCurrency, userProfile?.homeCurrency || "INR");
+              setInvoiceData(prev => ({
+                ...prev,
+                currency: selectedCurrency,
+                exchangeRate: rate || 1.0,
+              }));
+            }}
+          >
+            <option value="INR">INR (₹)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="JPY">JPY (¥)</option>
+            <option value="AUD">AUD (A$)</option>
+            <option value="CAD">CAD (C$)</option>
+          </select>
+        </div>
+        <div className="col-md-3">
+          <h5>Language</h5>
+          <select
+            className="form-select"
+            value={invoiceData.language || "EN"}
+            onChange={(e) => setInvoiceData(prev => ({ ...prev, language: e.target.value }))}
+          >
+            <option value="EN">English</option>
+            <option value="ES">Spanish (Español)</option>
+            <option value="FR">French (Français)</option>
+            <option value="DE">German (Deutsch)</option>
+            <option value="HI">Hindi (हिन्दी)</option>
+          </select>
+        </div>
+        <div className="col-md-3">
           <h5>Theme Color</h5>
           <div className="d-flex align-items-center gap-2">
             <input
@@ -136,9 +174,73 @@ const InvoiceForm = () => {
               value={invoiceData.themeColor || "#0d6efd"}
               onChange={(e) => setInvoiceData(prev => ({ ...prev, themeColor: e.target.value }))}
             />
-            <span className="text-muted small">Select a color for your invoice PDF</span>
+            <span className="text-muted small">PDF Color</span>
           </div>
         </div>
+      </div>
+
+      {/* RECURRING INVOICES CONFIG */}
+      <div className="mb-4 card p-3 shadow-sm border border-light">
+        <div className="form-check form-switch d-flex justify-content-between align-items-center">
+          <div>
+            <h5 className="mb-1 fw-bold text-dark">🔄 Recurring Invoice Template</h5>
+            <span className="text-muted small">Auto-generate and email billing statements to your client</span>
+          </div>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            style={{ width: "50px", height: "24px" }}
+            id="isRecurringSwitch"
+            checked={invoiceData.isRecurring || false}
+            onChange={(e) => {
+              const checked = e.target.checked;
+              // Set next generation date as 30 days out if enabling
+              const nextGen = checked ? new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString() : null;
+              setInvoiceData(prev => ({
+                ...prev,
+                isRecurring: checked,
+                recurringInterval: prev.recurringInterval || "MONTHLY",
+                recurrenceStatus: checked ? "ACTIVE" : "PAUSED",
+                nextGenerationDate: nextGen
+              }));
+            }}
+          />
+        </div>
+        {invoiceData.isRecurring && (
+          <div className="row g-3 mt-2 pt-2 border-top">
+            <div className="col-md-6">
+              <label className="form-label small fw-bold">Recurrence Period</label>
+              <select
+                className="form-select"
+                value={invoiceData.recurringInterval || "MONTHLY"}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  let diff = 30 * 24 * 60 * 60 * 1000;
+                  if (val === "WEEKLY") diff = 7 * 24 * 60 * 60 * 1000;
+                  else if (val === "YEARLY") diff = 365 * 24 * 60 * 60 * 1000;
+                  setInvoiceData(prev => ({
+                    ...prev,
+                    recurringInterval: val,
+                    nextGenerationDate: new Date(Date.now() + diff).toISOString()
+                  }));
+                }}
+              >
+                <option value="WEEKLY">Every Week (Weekly)</option>
+                <option value="MONTHLY">Every Month (Monthly)</option>
+                <option value="YEARLY">Every Year (Yearly)</option>
+              </select>
+            </div>
+            <div className="col-md-6">
+              <label className="form-label small fw-bold text-muted">Next Generation Target</label>
+              <input
+                type="text"
+                className="form-control bg-light"
+                value={invoiceData.nextGenerationDate ? new Date(invoiceData.nextGenerationDate).toLocaleDateString() : "N/A"}
+                disabled
+              />
+            </div>
+          </div>
+        )}
       </div>
       {/* COMPANY INFO */}
       <div className="mb-4">
@@ -214,6 +316,15 @@ const InvoiceForm = () => {
               placeholder="Phone"
               value={invoiceData.billing.phone}
               onChange={(e) => handleChange("billing", "phone", e.target.value)}
+            />
+          </div>
+          <div className="col-12">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Client Email Address (required for auto-billing)"
+              value={invoiceData.billing.email || ""}
+              onChange={(e) => handleChange("billing", "email", e.target.value)}
             />
           </div>
           <div className="col-12">

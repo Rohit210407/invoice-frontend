@@ -15,6 +15,7 @@ const BusinessProfilePage = () => {
     phone: userProfile?.companyPhone || '',
     address: userProfile?.companyAddress || '',
     gst: userProfile?.companyGst || '',
+    homeCurrency: userProfile?.homeCurrency || 'INR',
   });
 
   // Sync state with userProfile when loaded
@@ -26,6 +27,7 @@ const BusinessProfilePage = () => {
         phone: userProfile.companyPhone || '',
         address: userProfile.companyAddress || '',
         gst: userProfile.companyGst || '',
+        homeCurrency: userProfile.homeCurrency || 'INR',
       });
     }
   }, [userProfile]);
@@ -40,6 +42,7 @@ const BusinessProfilePage = () => {
         companyPhone: companyData.phone,
         companyAddress: companyData.address,
         companyGst: companyData.gst,
+        homeCurrency: companyData.homeCurrency || 'INR',
       };
 
       const response = await axios.put(`${baseURL}/users/profile`, payload, {
@@ -107,15 +110,33 @@ const BusinessProfilePage = () => {
           onChange={(e) => setCompanyData({...companyData, address: e.target.value})} 
         />
       </div>
-      <div className="mb-4">
-        <label className="form-label fw-medium">Tax / GST Number</label>
-        <input 
-          type="text" 
-          className="form-control" 
-          value={companyData.gst} 
-          onChange={(e) => setCompanyData({...companyData, gst: e.target.value})} 
-          placeholder="GSTIN123456789"
-        />
+      <div className="mb-4 row g-3">
+        <div className="col-md-6">
+          <label className="form-label fw-medium">Tax / GST Number</label>
+          <input 
+            type="text" 
+            className="form-control" 
+            value={companyData.gst} 
+            onChange={(e) => setCompanyData({...companyData, gst: e.target.value})} 
+            placeholder="GSTIN123456789"
+          />
+        </div>
+        <div className="col-md-6">
+          <label className="form-label fw-medium">Default Home Currency</label>
+          <select 
+            className="form-select"
+            value={companyData.homeCurrency}
+            onChange={(e) => setCompanyData({...companyData, homeCurrency: e.target.value})}
+          >
+            <option value="INR">INR (₹)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="JPY">JPY (¥)</option>
+            <option value="AUD">AUD (A$)</option>
+            <option value="CAD">CAD (C$)</option>
+          </select>
+        </div>
       </div>
 
       <button className="btn btn-primary d-flex align-items-center gap-2" onClick={handleSave} disabled={saving}>

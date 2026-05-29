@@ -13,6 +13,25 @@ const Template2 = ({ data }) => {
   const borderBg = `${themeColor}26`; // ~15% opacity
 
   const qrCodeUrl = data.qrCodeUrl;
+  const t = data.t || {
+    billedFrom: "Sender Information",
+    billedTo: "Billed To",
+    invoiceNo: "Invoice Number",
+    date: "Issue Date",
+    dueDate: "Due Date",
+    total: "Total Due",
+    description: "Item & Description",
+    qty: "Qty",
+    rate: "Rate",
+    amount: "Amount",
+    subtotal: "Subtotal",
+    tax: "Tax",
+    bankDetails: "Bank Details",
+    holder: "Kontoinhaber",
+    number: "Kontonummer",
+    ifsc: "IFSC Code",
+    terms: "Terms & Remarks"
+  };
 
   return (
     <div className="template2 mx-auto my-4 p-5 w-800 bg-white shadow-sm rounded-4 border border-light">
@@ -50,20 +69,20 @@ const Template2 = ({ data }) => {
       <div className="p-4 rounded-4 mb-4" style={{ backgroundColor: lightBg, border: `1px solid ${borderBg}` }}>
         <div className="row g-3">
           <div className="col-sm-3">
-            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>Invoice Number</span>
+            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>{t.invoiceNo}</span>
             <strong className="text-dark" style={{ fontSize: "15px" }}>{data.invoiceNumber || "N/A"}</strong>
           </div>
           <div className="col-sm-3">
-            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>Issue Date</span>
+            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>{t.date}</span>
             <span className="text-dark" style={{ fontSize: "14px" }}>{data.invoiceDate || "N/A"}</span>
           </div>
           <div className="col-sm-3">
-            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>Due Date</span>
+            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>{t.dueDate}</span>
             <span className="text-dark fw-semibold" style={{ fontSize: "14px" }}>{data.paymentDate || "N/A"}</span>
           </div>
           <div className="col-sm-3 text-sm-end text-start">
-            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>Total Due</span>
-            <strong className="fs-5" style={{ color: themeColor }}>₹{total.toFixed(2)}</strong>
+            <span className="small text-muted d-block mb-1 text-uppercase tracking-wider" style={{ fontSize: "10px" }}>{t.total}</span>
+            <strong className="fs-5" style={{ color: themeColor }}>{data.currencySymbol}{total.toFixed(2)}</strong>
           </div>
         </div>
       </div>
@@ -71,18 +90,18 @@ const Template2 = ({ data }) => {
       {/* Client Address Blocks */}
       <div className="row g-4 mb-5" style={{ fontSize: "13px" }}>
         <div className="col-sm-6">
-          <h6 className="fw-bold mb-2 small text-uppercase tracking-wider text-muted">Sender Information</h6>
+          <h6 className="fw-bold mb-2 small text-uppercase tracking-wider text-muted">{t.billedFrom}</h6>
           <p className="mb-1 text-dark fw-medium">{data.companyName}</p>
           <p className="mb-1 text-secondary">{data.companyAddress}</p>
-          <p className="mb-1 text-secondary">Phone: {data.companyPhone}</p>
-          {data.companyEmail && <p className="mb-1 text-secondary">Email: {data.companyEmail}</p>}
-          {data.companyGst && <p className="mb-0 text-secondary">GSTIN: {data.companyGst}</p>}
+          <p className="mb-1 text-secondary">{t.phone || "Phone"}: {data.companyPhone}</p>
+          {data.companyEmail && <p className="mb-1 text-secondary">{t.email || "Email"}: {data.companyEmail}</p>}
+          {data.companyGst && <p className="mb-0 text-secondary">{t.gst || "GSTIN"}: {data.companyGst}</p>}
         </div>
         <div className="col-sm-6 text-sm-end text-start">
-          <h6 className="fw-bold mb-2 small text-uppercase tracking-wider text-muted">Billed To</h6>
+          <h6 className="fw-bold mb-2 small text-uppercase tracking-wider text-muted">{t.billedTo}</h6>
           <p className="mb-1 text-dark fw-bold" style={{ fontSize: "14px" }}>{data.billingName}</p>
           <p className="mb-1 text-secondary">{data.billingAddress}</p>
-          <p className="mb-0 text-secondary">Phone: {data.billingPhone}</p>
+          <p className="mb-0 text-secondary">{t.phone || "Phone"}: {data.billingPhone}</p>
         </div>
       </div>
 
@@ -92,10 +111,10 @@ const Template2 = ({ data }) => {
           <table className="table table-borderless align-middle m-0" style={{ fontSize: "13.5px" }}>
             <thead>
               <tr style={{ backgroundColor: lightBg, borderBottom: `1px solid ${borderBg}` }}>
-                <th className="p-3 fw-bold text-uppercase tracking-wider" style={{ fontSize: "11px", color: themeColor }}>Item & Description</th>
-                <th className="p-3 text-center fw-bold text-uppercase tracking-wider" style={{ width: "10%", fontSize: "11px", color: themeColor }}>Qty</th>
-                <th className="p-3 text-end fw-bold text-uppercase tracking-wider" style={{ width: "20%", fontSize: "11px", color: themeColor }}>Rate</th>
-                <th className="p-3 text-end fw-bold text-uppercase tracking-wider" style={{ width: "20%", fontSize: "11px", color: themeColor }}>Amount</th>
+                <th className="p-3 fw-bold text-uppercase tracking-wider" style={{ fontSize: "11px", color: themeColor }}>{t.description}</th>
+                <th className="p-3 text-center fw-bold text-uppercase tracking-wider" style={{ width: "10%", fontSize: "11px", color: themeColor }}>{t.qty}</th>
+                <th className="p-3 text-end fw-bold text-uppercase tracking-wider" style={{ width: "20%", fontSize: "11px", color: themeColor }}>{t.rate}</th>
+                <th className="p-3 text-end fw-bold text-uppercase tracking-wider" style={{ width: "20%", fontSize: "11px", color: themeColor }}>{t.amount}</th>
               </tr>
             </thead>
             <tbody>
@@ -106,8 +125,8 @@ const Template2 = ({ data }) => {
                     <span className="small text-muted">{item.description}</span>
                   </td>
                   <td className="p-3 text-center text-secondary fw-semibold">{item.qty}</td>
-                  <td className="p-3 text-end text-secondary">₹{item.amount?.toFixed(2)}</td>
-                  <td className="p-3 text-end fw-bold text-dark">₹{(item.qty * item.amount).toFixed(2)}</td>
+                  <td className="p-3 text-end text-secondary">{data.currencySymbol}{item.amount?.toFixed(2)}</td>
+                  <td className="p-3 text-end fw-bold text-dark">{data.currencySymbol}{(item.qty * item.amount).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -120,19 +139,19 @@ const Template2 = ({ data }) => {
         <div className="col-md-5">
           <div className="p-4 rounded-4" style={{ backgroundColor: lightBg, border: `1px solid ${borderBg}`, fontSize: "13.5px" }}>
             <div className="d-flex justify-content-between mb-2">
-              <span className="text-secondary">Subtotal</span>
-              <span className="fw-semibold text-dark">₹{subtotal.toFixed(2)}</span>
+              <span className="text-secondary">{t.subtotal}</span>
+              <span className="fw-semibold text-dark">{data.currencySymbol}{subtotal.toFixed(2)}</span>
             </div>
             {data.tax > 0 && (
               <div className="d-flex justify-content-between mb-2">
-                <span className="text-secondary">Tax ({data.tax}%)</span>
-                <span className="fw-semibold text-dark">₹{taxAmount.toFixed(2)}</span>
+                <span className="text-secondary">{t.tax} ({data.tax}%)</span>
+                <span className="fw-semibold text-dark">{data.currencySymbol}{taxAmount.toFixed(2)}</span>
               </div>
             )}
             <hr className="my-3" style={{ borderColor: borderBg }} />
             <div className="d-flex justify-content-between fw-bold align-items-center" style={{ fontSize: "17px" }}>
-              <span style={{ color: themeColor }}>Total Due</span>
-              <span style={{ color: themeColor }}>₹{total.toFixed(2)}</span>
+              <span style={{ color: themeColor }}>{t.total}</span>
+              <span style={{ color: themeColor }}>{data.currencySymbol}{total.toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -143,17 +162,17 @@ const Template2 = ({ data }) => {
         {(data.accountName || data.accountNumber || data.accountIfscCode) && (
           <div className="col-md-6">
             <div className="p-4 rounded-4 h-100" style={{ border: `1px solid #f3f4f6`, backgroundColor: "#fafafa" }}>
-              <h6 className="fw-bold mb-3 text-uppercase text-secondary tracking-wider" style={{ fontSize: "10px" }}>Bank Details</h6>
-              {data.accountName && <p className="mb-2 text-muted"><strong>Holder:</strong> <span className="text-dark">{data.accountName}</span></p>}
-              {data.accountNumber && <p className="mb-2 text-muted"><strong>Account:</strong> <span className="text-dark">{data.accountNumber}</span></p>}
-              {data.accountIfscCode && <p className="mb-0 text-muted"><strong>IFSC:</strong> <span className="text-dark">{data.accountIfscCode}</span></p>}
+              <h6 className="fw-bold mb-3 text-uppercase text-secondary tracking-wider" style={{ fontSize: "10px" }}>{t.bankDetails}</h6>
+              {data.accountName && <p className="mb-2 text-muted"><strong>{t.holder || "Holder"}:</strong> <span className="text-dark">{data.accountName}</span></p>}
+              {data.accountNumber && <p className="mb-2 text-muted"><strong>{t.number || "Number"}:</strong> <span className="text-dark">{data.accountNumber}</span></p>}
+              {data.accountIfscCode && <p className="mb-0 text-muted"><strong>{t.ifsc || "IFSC"}:</strong> <span className="text-dark">{data.accountIfscCode}</span></p>}
             </div>
           </div>
         )}
         {data.notes && (
           <div className="col-md-6">
             <div className="p-4 rounded-4 h-100" style={{ border: `1px solid #f3f4f6`, backgroundColor: "#fafafa" }}>
-              <h6 className="fw-bold mb-3 text-uppercase text-secondary tracking-wider" style={{ fontSize: "10px" }}>Terms & Remarks</h6>
+              <h6 className="fw-bold mb-3 text-uppercase text-secondary tracking-wider" style={{ fontSize: "10px" }}>{t.terms}</h6>
               <p className="mb-0 text-muted" style={{ whiteSpace: "pre-line" }}>{data.notes}</p>
             </div>
           </div>

@@ -18,6 +18,25 @@ const Template4 = ({ data }) => {
         }
     };
 
+    const t = data.t || {
+      billedFrom: "Billed From",
+      billedTo: "Billed to",
+      invoiceNo: "Invoice No",
+      date: "Invoice Date",
+      dueDate: "Due Date",
+      description: "Item #/Item description",
+      qty: "Quantity",
+      rate: "Rate",
+      amount: "Amount",
+      subtotal: "Sub Total",
+      tax: "Tax",
+      total: "Total Due Amount",
+      bankDetails: "Bank Account Details",
+      holder: "Account Holder",
+      number: "Account Number",
+      ifsc: "IFSC / Branch Code"
+    };
+
     return (
         <div className="template4 border rounded mx-auto my-4 p-4">
             {/* Header */}
@@ -36,19 +55,19 @@ const Template4 = ({ data }) => {
                     <p className="mb-1">{data.companyAddress}</p>
                     <p className="mb-1">{data.companyPhone}</p>
                     {data.companyEmail && <p className="mb-1">{data.companyEmail}</p>}
-                    {data.companyGst && <p className="mb-0"><strong>GSTIN:</strong> {data.companyGst}</p>}
+                    {data.companyGst && <p className="mb-0"><strong>{t.gst || "GSTIN"}:</strong> {data.companyGst}</p>}
                 </div>
                 <div className="text-md-end w-50">
                     <h5 className="template4-title template4-primary-color">Invoice</h5>
-                    <p className="mb-1"><strong>Invoice No:</strong> {data.invoiceNumber}</p>
-                    <p className="mb-1"><strong>Invoice Date:</strong> {formatDate(data.invoiceDate)}</p>
-                    <p className="mb-0"><strong>Due Date:</strong> {formatDate(data.paymentDate)}</p>
+                    <p className="mb-1"><strong>{t.invoiceNo}:</strong> {data.invoiceNumber}</p>
+                    <p className="mb-1"><strong>{t.date}:</strong> {formatDate(data.invoiceDate)}</p>
+                    <p className="mb-0"><strong>{t.dueDate}:</strong> {formatDate(data.paymentDate)}</p>
                 </div>
             </div>
 
             {/* Billing */}
             <div className="mb-4 w-50">
-                <h6 className="fw-bold template4-primary-color">Billed to</h6>
+                <h6 className="fw-bold template4-primary-color">{t.billedTo}</h6>
                 <p className="mb-1">{data.billingName}</p>
                 <p className="mb-1">{data.billingAddress}</p>
                 <p className="mb-0">{data.billingPhone}</p>
@@ -59,10 +78,10 @@ const Template4 = ({ data }) => {
                 <table className="table table-bordered mb-0">
                     <thead className="template4-table-head text-white">
                     <tr>
-                        <th className="p-3 template4-table-head">Item #/Item description</th>
-                        <th className="p-3 text-center template4-table-head">Quantity</th>
-                        <th className="p-3 text-center template4-table-head">Rate</th>
-                        <th className="p-3 text-end template4-table-head">Amount</th>
+                        <th className="p-3 template4-table-head">{t.description}</th>
+                        <th className="p-3 text-center template4-table-head">{t.qty}</th>
+                        <th className="p-3 text-center template4-table-head">{t.rate}</th>
+                        <th className="p-3 text-end template4-table-head">{t.amount}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -87,15 +106,15 @@ const Template4 = ({ data }) => {
                     <table className="table table-bordered mb-0">
                         <tbody>
                         <tr>
-                            <td><strong>Sub Total</strong></td>
+                            <td><strong>{t.subtotal}</strong></td>
                             <td className="text-end">{data.currencySymbol}{subtotal.toFixed(2)}</td>
                         </tr>
                         <tr>
-                            <td><strong>Tax ({data.tax}%)</strong></td>
+                            <td><strong>{t.tax} ({data.tax}%)</strong></td>
                             <td className="text-end">{data.currencySymbol}{taxAmount.toFixed(2)}</td>
                         </tr>
                         <tr>
-                            <td className="fw-bold template4-table-head"><strong>Total Due Amount</strong></td>
+                            <td className="fw-bold template4-table-head"><strong>{t.total}</strong></td>
                             <td className="text-end fw-bold template4-table-head">{data.currencySymbol}{total.toFixed(2)}</td>
                         </tr>
                         </tbody>
@@ -106,10 +125,10 @@ const Template4 = ({ data }) => {
             {/* Bank Account Details Section */}
             {(data.accountName || data.accountNumber || data.accountIfscCode) && (
                 <div className="mt-4">
-                    <h6 className="mb-2 template4-primary-color fw-semibold">Bank Account Details</h6>
-                    {data.accountName && <p className="mb-1"><strong>Account Holder:</strong> {data.accountName}</p>}
-                    {data.accountNumber && <p className="mb-1"><strong>Account Number:</strong> {data.accountNumber}</p>}
-                    {data.accountIfscCode && <p className="mb-0"><strong>IFSC / Branch Code:</strong> {data.accountIfscCode}</p>}
+                    <h6 className="mb-2 template4-primary-color fw-semibold">{t.bankDetails}</h6>
+                    {data.accountName && <p className="mb-1"><strong>{t.holder || "Account Holder"}:</strong> {data.accountName}</p>}
+                    {data.accountNumber && <p className="mb-1"><strong>{t.number || "Account Number"}:</strong> {data.accountNumber}</p>}
+                    {data.accountIfscCode && <p className="mb-0"><strong>{t.ifsc || "IFSC / Branch Code"}:</strong> {data.accountIfscCode}</p>}
                 </div>
             )}
 

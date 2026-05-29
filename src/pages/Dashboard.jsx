@@ -22,7 +22,7 @@ function Dashboard() {
   const [selectedCustomerFilter, setSelectedCustomerFilter] = useState(null);
 
   const navigate = useNavigate();
-  const { baseURL, setInvoiceData, setSelectedTemplate, setInvoiceTitle, getNewInvoice } =
+  const { baseURL, setInvoiceData, setSelectedTemplate, setInvoiceTitle, getNewInvoice, convertCurrency, userProfile } =
     useContext(AppContext);
 
   const { getToken } = useAuth();
@@ -65,6 +65,22 @@ function Dashboard() {
     }
   };
 
+  const currencySymbols = {
+    INR: "₹",
+    USD: "$",
+    EUR: "€",
+    GBP: "£",
+    JPY: "¥",
+    AUD: "A$",
+    CAD: "C$",
+  };
+
+  const homeSymbol = currencySymbols[userProfile?.homeCurrency || "INR"] || "₹";
+
+  const getInvoiceSymbol = (inv) => {
+    return currencySymbols[inv.currency || "INR"] || "₹";
+  };
+
   // Calculations for Invoices
   const getInvoiceTotalAmount = (inv) => {
     const subtotal = inv.items?.reduce((s, item) => s + (item.qty * item.amount), 0) || 0;
@@ -72,19 +88,30 @@ function Dashboard() {
     return subtotal + tax;
   };
 
+  const getInvoiceTotalAmountInHomeCurrency = (inv) => {
+    const total = getInvoiceTotalAmount(inv);
+    const home = userProfile?.homeCurrency || "INR";
+    const invoiceCurr = inv.currency || "INR";
+    
+    if (inv.exchangeRate && inv.exchangeRate !== 1.0) {
+      return total * inv.exchangeRate;
+    }
+    return convertCurrency(total, invoiceCurr, home);
+  };
+
   const paidRevenue = invoices
     .filter(inv => inv.status === "Paid")
-    .reduce((sum, inv) => sum + getInvoiceTotalAmount(inv), 0);
+    .reduce((sum, inv) => sum + getInvoiceTotalAmountInHomeCurrency(inv), 0);
 
   const outstandingBalance = invoices
     .filter(inv => inv.status !== "Paid")
-    .reduce((sum, inv) => sum + getInvoiceTotalAmount(inv), 0);
+    .reduce((sum, inv) => sum + getInvoiceTotalAmountInHomeCurrency(inv), 0);
 
   const chartData = Object.values(invoices.reduce((acc, inv) => {
     const date = formatDate(inv.createdAt || inv.lastUpdatedAt);
     if (!acc[date]) acc[date] = { date, revenue: 0 };
     if (inv.status === "Paid") {
-      acc[date].revenue += getInvoiceTotalAmount(inv);
+      acc[date].revenue += getInvoiceTotalAmountInHomeCurrency(inv);
     }
     return acc;
   }, {})).slice(-7);
@@ -99,7 +126,7 @@ function Dashboard() {
       const email = inv.billing?.email || "N/A";
       const phone = inv.billing?.phone || "N/A";
       const address = inv.billing?.address || "N/A";
-      const totalAmount = getInvoiceTotalAmount(inv);
+      const totalAmount = getInvoiceTotalAmountInHomeCurrency(inv);
       const isPaid = inv.status === "Paid";
 
       if (!customerMap[name]) {
@@ -224,15 +251,15 @@ function Dashboard() {
         <div className="col-md-4">
           <div className="card shadow-sm h-100 p-4 border-0 rounded-4" style={{ background: "linear-gradient(135deg, #4f46e5 0%, #6366f1 100%)", color: "#fff" }}>
             <span className="small text-white-50 text-uppercase tracking-wider fw-bold">Total Revenue</span>
-            <h2 className="mb-2 fw-black mt-2">₹{paidRevenue.toFixed(2)}</h2>
-            <small className="text-white-50">From {invoices.filter(i => i.status === "Paid").length} paid receipts</small>
+            <h2 className="mb-2 fw-black mt-2">{homeSymbol}{paidRevenue.toFixed(2)}</h2>
+            <small className="text-white-50">From {invoices.filter(i => i.status === "Paid").length} paid receipts • Consolidated in {userProfile?.homeCurrency || "INR"}</small>
           </div>
         </div>
         <div className="col-md-4">
           <div className="card shadow-sm h-100 p-4 border-0 rounded-4" style={{ background: "linear-gradient(135deg, #f59e0b 0%, #d97706 100%)", color: "#fff" }}>
             <span className="small className text-white-50 text-uppercase tracking-wider fw-bold">Outstanding Balance</span>
-            <h2 className="mb-2 fw-black mt-2">₹{outstandingBalance.toFixed(2)}</h2>
-            <small className="text-white-50">Awaiting customer clearance</small>
+            <h2 className="mb-2 fw-black mt-2">{homeSymbol}{outstandingBalance.toFixed(2)}</h2>
+            <small className="text-white-50">Awaiting customer clearance • Consolidated in {userProfile?.homeCurrency || "INR"}</small>
           </div>
         </div>
         <div className="col-md-4">
@@ -256,7 +283,7 @@ function Dashboard() {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f3f4f6" />
                     <XAxis dataKey="date" stroke="#9ca3af" />
                     <YAxis stroke="#9ca3af" />
-                    <Tooltip formatter={(value) => `₹${value.toFixed(2)}`} />
+                    <Tooltip formatter={(value) => `${homeSymbol}${value.toFixed(2)}`} />
                     <Line type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 8 }} />
                   </LineChart>
                 </ResponsiveContainer>
@@ -316,8 +343,15 @@ function Dashboard() {
                     <h6 className="card-title fw-bold mb-2 text-truncate text-dark">{invoice.title}</h6>
                     <div className="d-flex justify-content-between align-items-center mb-2">
                       <span className="small text-muted">{invoice.invoice?.number || `No: ${invoice.id?.substring(0, 5)}`}</span>
-                      <strong className="text-dark">₹{getInvoiceTotalAmount(invoice).toFixed(2)}</strong>
+                      <strong className="text-dark">{getInvoiceSymbol(invoice)}{getInvoiceTotalAmount(invoice).toFixed(2)}</strong>
                     </div>
+                    {invoice.isRecurring && (
+                      <div className="mb-2">
+                        <span className="badge bg-primary-subtle text-primary rounded-pill small" style={{ fontSize: "10px" }}>
+                          🔄 Recurring ({invoice.recurringInterval})
+                        </span>
+                      </div>
+                    )}
                     <div className="d-flex justify-content-between align-items-center">
                       <span className={`badge ${getStatusBadge(invoice.status || "Draft")}`}>
                         {invoice.status || "Draft"}
@@ -386,10 +420,10 @@ function Dashboard() {
                       <td className="py-3 px-4 text-center">
                         <span className="badge bg-light text-dark border px-2 py-1 rounded-pill">{cust.invoicesCount}</span>
                       </td>
-                      <td className="py-3 px-4 text-end text-dark fw-bold">₹{cust.totalInvoiced.toFixed(2)}</td>
+                      <td className="py-3 px-4 text-end text-dark fw-bold">{homeSymbol}{cust.totalInvoiced.toFixed(2)}</td>
                       <td className="py-3 px-4 text-end">
                         <span className={`fw-bold ${cust.outstanding > 0 ? "text-danger" : "text-success"}`}>
-                          ₹{cust.outstanding.toFixed(2)}
+                          {homeSymbol}{cust.outstanding.toFixed(2)}
                         </span>
                       </td>
                       <td className="py-3 px-4 text-center">
@@ -465,7 +499,7 @@ function Dashboard() {
                           {inv.invoice?.dueDate || "N/A"}
                         </div>
                       </td>
-                      <td className="py-3 px-4 text-end text-dark fw-bold">₹{getInvoiceTotalAmount(inv).toFixed(2)}</td>
+                      <td className="py-3 px-4 text-end text-dark fw-bold">{getInvoiceSymbol(inv)}{getInvoiceTotalAmount(inv).toFixed(2)}</td>
                       <td className="py-3 px-4 text-center">
                         <span className={`badge ${getStatusBadge(inv.status || "Draft")}`}>
                           {inv.status || "Draft"}
