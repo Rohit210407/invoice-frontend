@@ -42,10 +42,10 @@ const AboutPage = () => {
               Next-Gen Invoicing
             </div>
             <h2 className="h2 fw-bold mb-4 text-white" style={{ letterSpacing: "-0.5px" }}>What is SmartInvoice?</h2>
-            <p className="fs-6 text-secondary mb-4" style={{ color: "#ffffff", lineHeight: "1.8", fontSize: "1.1rem" }}>
+            <p className="fs-6 text-white mb-4" style={{ lineHeight: "1.8", fontSize: "1.1rem" }}>
               SmartInvoice is a modern, cloud-based B2B SaaS platform designed specifically for freelancers, agencies, and small to medium-sized enterprises (SMEs). We eliminate the hassle of spreadsheets and manual calculations by providing an intuitive interface to generate, track, and manage your invoices.
             </p>
-            <p className="fs-6 text-secondary" style={{ color: "#ffffff", lineHeight: "1.8", fontSize: "1.1rem" }}>
+            <p className="fs-6 text-white" style={{ lineHeight: "1.8", fontSize: "1.1rem" }}>
               Our goal is to help you get paid faster, maintain a professional image with your clients, and keep your finances organized in one secure place.
             </p>
           </div>
