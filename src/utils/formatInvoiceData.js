@@ -25,6 +25,8 @@ export const formatInvoiceData = (invoiceData) => {
         companyName: company.name,
         companyAddress: company.address,
         companyPhone: company.phone,
+        companyEmail: company.email,
+        companyGst: company.gst,
         companyLogo: logo,
 
         invoiceNumber: invoice.number,

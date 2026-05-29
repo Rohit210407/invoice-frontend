@@ -45,10 +45,11 @@ const Template1 = ({ data }) => {
         <div className="col-6">
           <p className="mb-1"><strong>Company:</strong> <span className="text-dark">{data.companyName || "N/A"}</span></p>
           <p className="mb-1"><strong>Address:</strong> <span className="text-dark">{data.companyAddress || "N/A"}</span></p>
-          <p className="mb-1"><strong>Sender Name:</strong> <span className="text-dark">{data.companyName || "N/A"}</span></p>
+          {data.companyGst && <p className="mb-1"><strong>GSTIN:</strong> <span className="text-dark fw-semibold">{data.companyGst}</span></p>}
         </div>
         <div className="col-6 text-md-end text-start">
-          <p className="mb-1"><strong>Telephone/E-mail:</strong> <span className="text-dark">{data.companyPhone || "N/A"}</span></p>
+          <p className="mb-1"><strong>Phone:</strong> <span className="text-dark">{data.companyPhone || "N/A"}</span></p>
+          {data.companyEmail && <p className="mb-1"><strong>Email:</strong> <span className="text-dark">{data.companyEmail}</span></p>}
           <p className="mb-1"><strong>Invoice Date:</strong> <span className="text-dark">{data.invoiceDate || "N/A"}</span></p>
           <p className="mb-0"><strong>Due Date:</strong> <span className="text-dark fw-bold">{data.paymentDate || "N/A"}</span></p>
         </div>

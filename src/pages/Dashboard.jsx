@@ -22,7 +22,7 @@ function Dashboard() {
   const [selectedCustomerFilter, setSelectedCustomerFilter] = useState(null);
 
   const navigate = useNavigate();
-  const { baseURL, setInvoiceData, setSelectedTemplate, setInvoiceTitle } =
+  const { baseURL, setInvoiceData, setSelectedTemplate, setInvoiceTitle, getNewInvoice } =
     useContext(AppContext);
 
   const { getToken } = useAuth();
@@ -52,7 +52,7 @@ function Dashboard() {
   const handleCreateNew = () => {
     setInvoiceTitle("Create Invoice");
     setSelectedTemplate("template1");
-    setInvoiceData(JSON.parse(JSON.stringify(initialInvoiceData)));
+    setInvoiceData(getNewInvoice());
     navigate("/generate");
   };
 

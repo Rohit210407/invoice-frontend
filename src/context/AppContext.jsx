@@ -9,7 +9,7 @@ export const initialInvoiceData = {
   shipping: { name: "", phone: "", address: "" },
   invoice: { number: "", date: "", dueDate: "" },
   account: { name: "", number: "", ifsccode: "" },
-  company: { name: "", phone: "", address: "" },
+  company: { name: "", phone: "", address: "", email: "", gst: "" },
   tax: 0,
   notes: "",
   items: [{ name: "", qty: "", amount: "", description: "", total: 0 }],
@@ -23,8 +23,23 @@ export const AppContextProvider = (props) => {
   const [invoiceData, setInvoiceData] = useState(initialInvoiceData);
   const [invoiceTitle, setInvoiceTitle] = useState("Create Invoice");
   const [selectedTemplate, setSelectedTemplate] = useState("template1");
+  const [userProfile, setUserProfile] = useState(null);
 
   const baseURL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api";
+
+  const getNewInvoice = () => {
+    const freshInvoice = JSON.parse(JSON.stringify(initialInvoiceData));
+    if (userProfile) {
+      freshInvoice.company = {
+        name: userProfile.companyName || "",
+        phone: userProfile.companyPhone || "",
+        address: userProfile.companyAddress || "",
+        email: userProfile.companyEmail || "",
+        gst: userProfile.companyGst || "",
+      };
+    }
+    return freshInvoice;
+  };
 
   const contextValue = {
     baseURL,
@@ -35,6 +50,9 @@ export const AppContextProvider = (props) => {
     selectedTemplate,
     setSelectedTemplate,
     initialInvoiceData,
+    userProfile,
+    setUserProfile,
+    getNewInvoice,
   };
 
   return (

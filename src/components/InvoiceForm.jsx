@@ -162,6 +162,24 @@ const InvoiceForm = () => {
               onChange={(e) => handleChange("company", "phone", e.target.value)}
             />
           </div>
+          <div className="col-md-6">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Company Email"
+              value={invoiceData.company.email || ""}
+              onChange={(e) => handleChange("company", "email", e.target.value)}
+            />
+          </div>
+          <div className="col-md-6">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Tax / GST Number"
+              value={invoiceData.company.gst || ""}
+              onChange={(e) => handleChange("company", "gst", e.target.value)}
+            />
+          </div>
           <div className="col-12">
             <input
               type="text"

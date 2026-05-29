@@ -8,7 +8,7 @@ const UserSyncHandler = () => {
   const { isLoaded, isSignedIn, getToken } = useAuth();
   const { user } = useUser();
   const [synced, setSynced] = useState(false);
-  const { baseURL } = useContext(AppContext);
+  const { baseURL, setUserProfile } = useContext(AppContext);
 
   useEffect(() => {
     const saveUser = async () => {
@@ -27,9 +27,13 @@ const UserSyncHandler = () => {
           photoUrl: user.imageUrl,
         };
 
-        await axios.post(baseURL + "/users", userData, {
+        const response = await axios.post(baseURL + "/users", userData, {
           headers: { Authorization: `Bearer ${token}` },
         });
+
+        if (response.data) {
+          setUserProfile(response.data);
+        }
 
         setSynced(true);
       } catch (error) {
@@ -38,7 +42,7 @@ const UserSyncHandler = () => {
       }
     };
     saveUser();
-  }, [isLoaded, isSignedIn, getToken, user, synced, baseURL]);
+  }, [isLoaded, isSignedIn, getToken, user, synced, baseURL, setUserProfile]);
 
   return null;
 };

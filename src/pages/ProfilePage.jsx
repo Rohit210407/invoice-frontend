@@ -1,22 +1,63 @@
-import React, { useContext, useState } from 'react';
-import { UserProfile } from '@clerk/clerk-react';
-import { Building2, CreditCard, Save } from 'lucide-react';
+import React, { useContext, useState, useEffect } from 'react';
+import { UserProfile, useAuth } from '@clerk/clerk-react';
+import { Building2, CreditCard, Save, Loader2 } from 'lucide-react';
 import { AppContext } from '../context/AppContext';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const BusinessProfilePage = () => {
-  const { initialInvoiceData } = useContext(AppContext);
+  const { userProfile, setUserProfile, baseURL } = useContext(AppContext);
+  const { getToken } = useAuth();
+  const [saving, setSaving] = useState(false);
   const [companyData, setCompanyData] = useState({
-    name: initialInvoiceData.company.name || '',
-    email: 'contact@mycompany.com',
-    phone: initialInvoiceData.company.phone || '',
-    address: initialInvoiceData.company.address || '',
-    gst: 'GSTIN123456789',
+    name: userProfile?.companyName || '',
+    email: userProfile?.companyEmail || '',
+    phone: userProfile?.companyPhone || '',
+    address: userProfile?.companyAddress || '',
+    gst: userProfile?.companyGst || '',
   });
 
-  const handleSave = () => {
-    // Mock save logic
-    toast.success('Business profile updated successfully!');
+  // Sync state with userProfile when loaded
+  useEffect(() => {
+    if (userProfile) {
+      setCompanyData({
+        name: userProfile.companyName || '',
+        email: userProfile.companyEmail || '',
+        phone: userProfile.companyPhone || '',
+        address: userProfile.companyAddress || '',
+        gst: userProfile.companyGst || '',
+      });
+    }
+  }, [userProfile]);
+
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+      const token = await getToken();
+      const payload = {
+        companyName: companyData.name,
+        companyEmail: companyData.email,
+        companyPhone: companyData.phone,
+        companyAddress: companyData.address,
+        companyGst: companyData.gst,
+      };
+
+      const response = await axios.put(`${baseURL}/users/profile`, payload, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (response.data) {
+        setUserProfile(response.data);
+        toast.success('Business profile updated successfully!');
+      } else {
+        throw new Error('No data returned');
+      }
+    } catch (error) {
+      console.error('Failed to update business profile', error);
+      toast.error('Failed to update business profile. Please try again.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -44,6 +85,7 @@ const BusinessProfilePage = () => {
             className="form-control" 
             value={companyData.email} 
             onChange={(e) => setCompanyData({...companyData, email: e.target.value})} 
+            placeholder="contact@mycompany.com"
           />
         </div>
         <div className="col-md-6 mt-3 mt-md-0">
@@ -72,11 +114,13 @@ const BusinessProfilePage = () => {
           className="form-control" 
           value={companyData.gst} 
           onChange={(e) => setCompanyData({...companyData, gst: e.target.value})} 
+          placeholder="GSTIN123456789"
         />
       </div>
 
-      <button className="btn btn-primary d-flex align-items-center gap-2" onClick={handleSave}>
-        <Save size={18} /> Save Changes
+      <button className="btn btn-primary d-flex align-items-center gap-2" onClick={handleSave} disabled={saving}>
+        {saving ? <Loader2 size={18} className="spin-animation" /> : <Save size={18} />}
+        {saving ? 'Saving Changes...' : 'Save Changes'}
       </button>
     </div>
   );

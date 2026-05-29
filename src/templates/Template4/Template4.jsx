@@ -34,7 +34,9 @@ const Template4 = ({ data }) => {
                     )}
                     <h4 className="template4-company-name">{data.companyName}</h4>
                     <p className="mb-1">{data.companyAddress}</p>
-                    <p className="mb-0">{data.companyPhone}</p>
+                    <p className="mb-1">{data.companyPhone}</p>
+                    {data.companyEmail && <p className="mb-1">{data.companyEmail}</p>}
+                    {data.companyGst && <p className="mb-0"><strong>GSTIN:</strong> {data.companyGst}</p>}
                 </div>
                 <div className="text-md-end w-50">
                     <h5 className="template4-title template4-primary-color">Invoice</h5>

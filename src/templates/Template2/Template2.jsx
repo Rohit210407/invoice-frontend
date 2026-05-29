@@ -74,7 +74,9 @@ const Template2 = ({ data }) => {
           <h6 className="fw-bold mb-2 small text-uppercase tracking-wider text-muted">Sender Information</h6>
           <p className="mb-1 text-dark fw-medium">{data.companyName}</p>
           <p className="mb-1 text-secondary">{data.companyAddress}</p>
-          <p className="mb-0 text-secondary">Phone: {data.companyPhone}</p>
+          <p className="mb-1 text-secondary">Phone: {data.companyPhone}</p>
+          {data.companyEmail && <p className="mb-1 text-secondary">Email: {data.companyEmail}</p>}
+          {data.companyGst && <p className="mb-0 text-secondary">GSTIN: {data.companyGst}</p>}
         </div>
         <div className="col-sm-6 text-sm-end text-start">
           <h6 className="fw-bold mb-2 small text-uppercase tracking-wider text-muted">Billed To</h6>

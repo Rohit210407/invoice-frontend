@@ -48,7 +48,9 @@ const Template3 = ({ data }) => {
           <span className="small text-muted text-uppercase d-block mb-2 tracking-wider" style={{ fontSize: "9px" }}>Billed From</span>
           <p className="mb-1 fw-bold text-dark">{data.companyName}</p>
           <p className="mb-1 text-secondary">{data.companyAddress}</p>
-          <p className="mb-0 text-secondary">Phone: {data.companyPhone}</p>
+          <p className="mb-1 text-secondary">Phone: {data.companyPhone}</p>
+          {data.companyEmail && <p className="mb-1 text-secondary">Email: {data.companyEmail}</p>}
+          {data.companyGst && <p className="mb-0 text-secondary">GSTIN: {data.companyGst}</p>}
         </div>
         <div className="col-sm-4">
           <span className="small text-muted text-uppercase d-block mb-2 tracking-wider" style={{ fontSize: "9px" }}>Billed To</span>

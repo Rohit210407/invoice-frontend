@@ -11,11 +11,11 @@ const LandingPage = () => {
     const {user} = useUser();
     const navigate = useNavigate();
     const {openSignIn} = useClerk();
-    const {setInvoiceData, setSelectedTemplate, setInvoiceTitle} = useContext(AppContext);
+    const {setInvoiceData, setSelectedTemplate, setInvoiceTitle, getNewInvoice} = useContext(AppContext);
 
     const handleActionButton = () => {
         if (user) {
-            setInvoiceData(initialInvoiceData);
+            setInvoiceData(getNewInvoice());
             setSelectedTemplate("template1");
             setInvoiceTitle("Create Invoice");
             navigate("/generate");
