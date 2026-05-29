@@ -1,17 +1,17 @@
 import Logo from "../../components/Logo.jsx";
-import {useContext} from "react";
+import { useContext } from "react";
 import './LandingPage.css';
-import {useClerk, useUser} from "@clerk/clerk-react";
-import {useNavigate, Link} from "react-router-dom";
-import {AppContext, initialInvoiceData} from "../../context/AppContext.jsx";
-import {assets} from "../../assets/assets.js";
-import { Github, Linkedin } from 'lucide-react';
+import { useClerk, useUser } from "@clerk/clerk-react";
+import { useNavigate, Link } from "react-router-dom";
+import { AppContext } from "../../context/AppContext.jsx";
+import { assets } from "../../assets/assets.js";
+import { Github, Linkedin, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const LandingPage = () => {
-    const {user} = useUser();
+    const { user } = useUser();
     const navigate = useNavigate();
-    const {openSignIn} = useClerk();
-    const {setInvoiceData, setSelectedTemplate, setInvoiceTitle, getNewInvoice} = useContext(AppContext);
+    const { openSignIn } = useClerk();
+    const { setInvoiceData, setSelectedTemplate, setInvoiceTitle, getNewInvoice } = useContext(AppContext);
 
     const handleActionButton = () => {
         if (user) {
@@ -26,7 +26,7 @@ const LandingPage = () => {
 
     return (
         <>
-            {/* Hero Section: Full-width, centered text with background image */}
+            {/* Hero Section: Full-width, centered text with background image (Retained Upper Part) */}
             <header id="hero" className="hero-section text-white text-center">
                 <div className="container py-5 d-flex flex-column justify-content-center" style={{ minHeight: '85vh' }}>
                     <div className="row py-lg-5">
@@ -65,25 +65,29 @@ const LandingPage = () => {
                 </div>
             </header>
 
-            {/* How It Works Section: Explains the process in steps using cards */}
-            <section id="how-it-works" className="py-5 bg-light">
-                <div className="container">
-                    <h2 className="text-center mb-5 display-5 fw-bold">Get Started in 4 Simple Steps</h2>
+            {/* How It Works Section: Explains the process in steps using premium glassmorphism */}
+            <section id="how-it-works" className="py-5 landing-dark-section">
+                <div className="container py-4">
+                    <div className="text-center mb-5">
+                        <div className="badge px-3 py-2 rounded-pill mb-3" style={{ background: "rgba(99, 102, 241, 0.15)", color: "#818cf8", border: "1px solid rgba(99, 102, 241, 0.25)", fontSize: "14px", fontWeight: "600" }}>
+                            Workflow
+                        </div>
+                        <h2 className="text-center mb-3 display-5 fw-bold text-white" style={{ letterSpacing: "-1px" }}>Get Started in 4 Simple Steps</h2>
+                        <p className="text-muted fs-6 mx-auto" style={{ maxWidth: "550px" }}>
+                            SmartInvoice streamlines your billing operations. Go from draft to paid statement in seconds.
+                        </p>
+                    </div>
+                    
                     <div className="row g-4 justify-content-center">
                         {/* Step 1 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
-                            <div className="card h-100 shadow-sm border-0 text-center flex-fill">
-                                <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-primary-soft">
-                                    <img
-                                        src="https://placehold.co/150x150/0D6EFD/FFFFFF?text=1&font=montserrat"
-                                        className="rounded-circle"
-                                        alt="Enter Invoice Details"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
-                                    />
+                            <div className="card landing-glass-card h-100 text-center flex-fill p-4">
+                                <div className="d-flex align-items-center justify-content-center mb-4 mt-2">
+                                    <div className="landing-step-badge step-1">1</div>
                                 </div>
-                                <div className="card-body p-4">
-                                    <h5 className="card-title fw-bold mb-2 fs-5">Enter Details</h5>
-                                    <p className="card-text text-muted small">
+                                <div className="card-body p-0">
+                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Enter Details</h5>
+                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                         Quickly fill in your clients information, item descriptions, quantities, and prices. Our intuitive form makes it a breeze.
                                     </p>
                                 </div>
@@ -92,18 +96,13 @@ const LandingPage = () => {
 
                         {/* Step 2 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
-                            <div className="card h-100 shadow-sm border-0 text-center flex-fill">
-                                <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-success-soft">
-                                    <img
-                                        src="https://placehold.co/150x150/198754/FFFFFF?text=2&font=montserrat"
-                                        className="rounded-circle"
-                                        alt="Choose Template"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
-                                    />
+                            <div className="card landing-glass-card h-100 text-center flex-fill p-4">
+                                <div className="d-flex align-items-center justify-content-center mb-4 mt-2">
+                                    <div className="landing-step-badge step-2">2</div>
                                 </div>
-                                <div className="card-body p-4">
-                                    <h5 className="card-title fw-bold mb-2 fs-5">Choose Template</h5>
-                                    <p className="card-text text-muted small">
+                                <div className="card-body p-0">
+                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Choose Template</h5>
+                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                         Browse our gallery of professionally designed templates. Pick one that matches your brand and style.
                                     </p>
                                 </div>
@@ -112,18 +111,13 @@ const LandingPage = () => {
 
                         {/* Step 3 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
-                            <div className="card h-100 shadow-sm border-0 text-center flex-fill">
-                                <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-warning-soft">
-                                    <img
-                                        src="https://placehold.co/150x150/FFC107/000000?text=3&font=montserrat"
-                                        className="rounded-circle"
-                                        alt="Preview Invoice"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
-                                    />
+                            <div className="card landing-glass-card h-100 text-center flex-fill p-4">
+                                <div className="d-flex align-items-center justify-content-center mb-4 mt-2">
+                                    <div className="landing-step-badge step-3">3</div>
                                 </div>
-                                <div className="card-body p-4">
-                                    <h5 className="card-title fw-bold mb-2 fs-5">Preview Invoice</h5>
-                                    <p className="card-text text-muted small">
+                                <div className="card-body p-0">
+                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Preview Invoice</h5>
+                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                         See exactly how your invoice will look before sending it. Make any last-minute adjustments with ease.
                                     </p>
                                 </div>
@@ -132,18 +126,13 @@ const LandingPage = () => {
 
                         {/* Step 4 Card */}
                         <div className="col-md-6 col-lg-3 d-flex">
-                            <div className="card h-100 shadow-sm border-0 text-center flex-fill">
-                                <div className="card-img-top-container d-flex align-items-center justify-content-center p-4 bg-info-soft">
-                                    <img
-                                        src="https://placehold.co/150x150/0DCAF0/FFFFFF?text=4&font=montserrat"
-                                        className="rounded-circle"
-                                        alt="Download & Save"
-                                        onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/150x150/E0E0E0/000000?text=Error'; }}
-                                    />
+                            <div className="card landing-glass-card h-100 text-center flex-fill p-4">
+                                <div className="d-flex align-items-center justify-content-center mb-4 mt-2">
+                                    <div className="landing-step-badge step-4">4</div>
                                 </div>
-                                <div className="card-body p-4">
-                                    <h5 className="card-title fw-bold mb-2 fs-5">Download & Save</h5>
-                                    <p className="card-text text-muted small">
+                                <div className="card-body p-0">
+                                    <h5 className="card-title fw-bold mb-3 text-white fs-5">Download & Save</h5>
+                                    <p className="card-text small" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
                                         Download your invoice as a PDF, send it directly via email, or save it for your records and future reference.
                                     </p>
                                 </div>
@@ -153,120 +142,153 @@ const LandingPage = () => {
                 </div>
             </section>
 
-            {/* Features Section: Highlights key benefits with images and text */}
-            <section id="features" className="py-5">
-                <div className="container">
-                    <h2 className="text-center mb-5 display-5 fw-bold">Why Choose SmartInvoice?</h2>
+            {/* Features Section: Highlights key benefits with images and premium checklist */}
+            <section id="features" className="py-5 landing-dark-section">
+                <div className="container py-4">
+                    <div className="text-center mb-5">
+                        <div className="badge px-3 py-2 rounded-pill mb-3" style={{ background: "rgba(168, 85, 247, 0.15)", color: "#c084fc", border: "1px solid rgba(168, 85, 247, 0.25)", fontSize: "14px", fontWeight: "600" }}>
+                            Value Propositions
+                        </div>
+                        <h2 className="text-center mb-4 display-5 fw-bold text-white" style={{ letterSpacing: "-1px" }}>Why Choose SmartInvoice?</h2>
+                    </div>
+
                     {/* Feature 1 */}
-                    <div className="row align-items-center gy-4">
-                        <div className="col-md-6">
-                            <img
-                                src={assets.landing1}
-                                className="img-fluid rounded shadow-lg"
-                                alt="Invoice Customization"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
-                            />
+                    <div className="row align-items-center gy-5 mt-2">
+                        <div className="col-lg-6">
+                            <div className="landing-feature-img-wrapper">
+                                <img
+                                    src={assets.landing1}
+                                    className="img-fluid w-100"
+                                    alt="Invoice Customization"
+                                    onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/1e293b/FFFFFF?text=Customization'; }}
+                                />
+                            </div>
                         </div>
-                        <div className="col-md-6">
-                            <h3 className="fw-bold mx-2">Easy to fill invoice details</h3>
-                            <p className="text-muted lead fs-6 mx-2">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        <div className="col-lg-6 ps-lg-5">
+                            <div className="badge px-3 py-1 rounded-pill mb-3" style={{ background: "rgba(99, 102, 241, 0.15)", color: "#818cf8", fontSize: "12px", fontWeight: "600" }}>
+                                Custom Branding
+                            </div>
+                            <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Easy to fill invoice details</h3>
+                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                SmartInvoice provides standard data structures that auto-populate default business headers, tax ratios, currencies, and translation properties instantly. No manual typing required.
                             </p>
-                            <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Curated list of templates from gallery.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Add your logo and invoice details.</li>
-                                <li><i className="bi bi-check-circle-fill text-primary me-2"></i>Tailor fields to your needs.</li>
-                            </ul>
+                            <div className="d-flex flex-column gap-2">
+                                <div className="bullet-glow-item">Curated list of templates from gallery.</div>
+                                <div className="bullet-glow-item">Add your logo and invoice details.</div>
+                                <div className="bullet-glow-item">Tailor fields to your needs.</div>
+                            </div>
                         </div>
                     </div>
+
+                    <div className="landing-divider"></div>
+
                     {/* Feature 2 */}
-                    <div className="row align-items-center gy-4 mt-5 flex-row-reverse"> {/* flex-row-reverse alternates image/text */}
-                        <div className="col-md-6">
-                            <img
-                                src={assets.landing2}
-                                className="img-fluid rounded shadow-lg"
-                                alt="Time Saving"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
-                            />
+                    <div className="row align-items-center gy-5 mt-2 flex-lg-row-reverse">
+                        <div className="col-lg-6">
+                            <div className="landing-feature-img-wrapper">
+                                <img
+                                    src={assets.landing2}
+                                    className="img-fluid w-100"
+                                    alt="Time Saving"
+                                    onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/1e293b/FFFFFF?text=Dashboard'; }}
+                                />
+                            </div>
                         </div>
-                        <div className="col-md-6">
-                            <h3 className="fw-bold mx-2">Beautiful Dashboard</h3>
-                            <p className="text-muted lead fs-6 mx-2">
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <div className="col-lg-6 pe-lg-5">
+                            <div className="badge px-3 py-1 rounded-pill mb-3" style={{ background: "rgba(16, 185, 129, 0.15)", color: "#34d399", fontSize: "12px", fontWeight: "600" }}>
+                                Live Insights
+                            </div>
+                            <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Beautiful Dashboard</h3>
+                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                Gain full financial clarity using automated analytical widgets. View outstanding statements, track unpaid accounts, and auto-convert currencies in one place.
                             </p>
-                            <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>View the previous invoices.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Your saved invoices with thumbnail.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Reuse one or more invoices.</li>
-                                <li><i className="bi bi-check-circle-fill text-primary me-2"></i>Track the invoices.</li>
-
-                            </ul>
+                            <div className="d-flex flex-column gap-2">
+                                <div className="bullet-glow-item">View the previous invoices.</div>
+                                <div className="bullet-glow-item">Your saved invoices with thumbnail.</div>
+                                <div className="bullet-glow-item">Reuse one or more invoices.</div>
+                                <div className="bullet-glow-item">Track the invoices.</div>
+                            </div>
                         </div>
                     </div>
+
+                    <div className="landing-divider"></div>
+
                     {/* Feature 3 */}
-                    <div className="row align-items-center gy-4 mt-5">
-                        <div className="col-md-6">
-                            <img
-                                src={assets.landing3}
-                                className="img-fluid rounded shadow-lg"
-                                alt="Invoice Customization"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
-                            />
+                    <div className="row align-items-center gy-5 mt-2">
+                        <div className="col-lg-6">
+                            <div className="landing-feature-img-wrapper">
+                                <img
+                                    src={assets.landing3}
+                                    className="img-fluid w-100"
+                                    alt="Invoice Customization"
+                                    onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/1e293b/FFFFFF?text=Preview'; }}
+                                />
+                            </div>
                         </div>
-                        <div className="col-md-6">
-                            <h3 className="fw-bold mx-2">Invoice Preview with Action Buttons</h3>
-                            <p className="text-muted lead fs-6 mx-2">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        <div className="col-lg-6 ps-lg-5">
+                            <div className="badge px-3 py-1 rounded-pill mb-3" style={{ background: "rgba(236, 72, 153, 0.15)", color: "#f472b6", fontSize: "12px", fontWeight: "600" }}>
+                                Live Editor
+                            </div>
+                            <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Invoice Preview with Action Buttons</h3>
+                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                What you see is exactly what your client gets. View your fully formatted live templates side-by-side with your input configurations instantly.
                             </p>
-                            <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Live preview.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Switch between multiple invoices.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>One click to Save, Download and Delete invoices.</li>
-                            </ul>
+                            <div className="d-flex flex-column gap-2">
+                                <div className="bullet-glow-item">Live preview.</div>
+                                <div className="bullet-glow-item">Switch between multiple invoices.</div>
+                                <div className="bullet-glow-item">One click to Save, Download and Delete invoices.</div>
+                            </div>
                         </div>
                     </div>
-                    {/* Feature 4 */}
-                    <div className="row align-items-center gy-4 mt-5 flex-row-reverse"> {/* flex-row-reverse alternates image/text */}
-                        <div className="col-md-6">
-                            <img
-                                src={assets.landing4}
-                                className="img-fluid rounded shadow-lg"
-                                alt="Time Saving"
-                                onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/E0E0E0/000000?text=Error'; }}
-                            />
-                        </div>
-                        <div className="col-md-6">
-                            <h3 className="fw-bold mx-2">Send invoices instantly</h3>
-                            <p className="text-muted lead fs-6 mx-2">
-                                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                            <ul className="list-unstyled text-muted">
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Send invoices instantly without leaving the application.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>One click to send invoices.</li>
-                                <li className="mb-2"><i className="bi bi-check-circle-fill text-primary me-2"></i>Send unlimited invoices.</li>
 
-                            </ul>
+                    <div className="landing-divider"></div>
+
+                    {/* Feature 4 */}
+                    <div className="row align-items-center gy-5 mt-2 flex-lg-row-reverse">
+                        <div className="col-lg-6">
+                            <div className="landing-feature-img-wrapper">
+                                <img
+                                    src={assets.landing4}
+                                    className="img-fluid w-100"
+                                    alt="Time Saving"
+                                    onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/600x400/1e293b/FFFFFF?text=Delivery'; }}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-lg-6 pe-lg-5">
+                            <div className="badge px-3 py-1 rounded-pill mb-3" style={{ background: "rgba(6, 182, 212, 0.15)", color: "#22d3ee", fontSize: "12px", fontWeight: "600" }}>
+                                Direct Dispatch
+                            </div>
+                            <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Send invoices instantly</h3>
+                            <p className="lead fs-6 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                                Deliver billing statements securely and instantly to clients. Connect email services to send PDF structures or automated checkout statements smoothly.
+                            </p>
+                            <div className="d-flex flex-column gap-2">
+                                <div className="bullet-glow-item">Send invoices instantly without leaving the application.</div>
+                                <div className="bullet-glow-item">One click to send invoices.</div>
+                                <div className="bullet-glow-item">Send unlimited invoices.</div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Call to Action Section: Final prompt for users to start */}
-            <section id="generate-invoice" className="py-5 text-center bg-primary text-white">
-                <div className="container">
-                    <h2 className="display-5 fw-bold mb-3">Ready to Streamline Your Invoicing?</h2>
-                    <p className="lead mb-4 mx-auto" style={{ maxWidth: '600px' }}>
+            <section id="generate-invoice" className="py-5 text-center landing-cta-premium text-white">
+                <div className="container py-5">
+                    <h2 className="display-4 fw-bold mb-3 text-white" style={{ letterSpacing: "-1px" }}>Ready to Streamline Your Invoicing?</h2>
+                    <p className="lead mb-5 mx-auto" style={{ maxWidth: '600px', color: '#9ca3af', fontSize: '1.15rem', lineHeight: '1.7' }}>
                         Join thousands of freelancers and small businesses who trust SmartInvoice.
                         Start creating professional invoices today – its fast, easy, and effective!
                     </p>
-                    <button className="btn btn-lg btn-warning fw-bold rounded-pill px-5 py-3" onClick={handleActionButton}>
+                    <button className="btn-pulse-glow" onClick={handleActionButton}>
                         Start Generating Invoices Now
                     </button>
                 </div>
             </section>
 
             {/* Footer: Copyright and social media links */}
-            <footer className="py-5 bg-dark text-white-50">
+            <footer className="py-5 bg-dark text-white-50" style={{ background: "#05070c !important", borderTop: "1px solid rgba(255, 255, 255, 0.05)" }}>
                 <div className="container text-center">
                     <Logo 
                         height={60} 
@@ -277,16 +299,16 @@ const LandingPage = () => {
                             border: "1px solid rgba(255, 255, 255, 0.1)"
                         }}
                     />
-                    <p className="text-white fw-bold mt-3 fs-5" style={{ letterSpacing: "-0.5px" }}>SmartInvoice</p>
-                    <p className="mb-0">
+                    <p className="text-white fw-bold mt-3 fs-5 mb-1" style={{ letterSpacing: "-0.5px" }}>SmartInvoice</p>
+                    <p className="mb-0 small" style={{ color: "#4b5563" }}>
                         &copy; {new Date().getFullYear()} SmartInvoice. All Rights Reserved.
                     </p>
                     <p className="mt-3">
-                        <a href="https://github.com/Rohit210407" target="_blank" rel="noreferrer" className="text-white-50 me-3" style={{ transition: "color 0.2s" }} onMouseEnter={(e) => e.currentTarget.classList.replace('text-white-50', 'text-white')} onMouseLeave={(e) => e.currentTarget.classList.replace('text-white', 'text-white-50')}>
-                            <Github size={28} />
+                        <a href="https://github.com/Rohit210407" target="_blank" rel="noreferrer" className="text-white-50 me-3 d-inline-block hover-scale" style={{ transition: "all 0.3s ease" }} onMouseEnter={(e) => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; e.currentTarget.style.transform = 'scale(1)'; }}>
+                            <Github size={26} />
                         </a>
-                        <a href="https://www.linkedin.com/in/rohit-wankhede-7a0b2b257" target="_blank" rel="noreferrer" className="text-white-50" style={{ transition: "color 0.2s" }} onMouseEnter={(e) => e.currentTarget.classList.replace('text-white-50', 'text-white')} onMouseLeave={(e) => e.currentTarget.classList.replace('text-white', 'text-white-50')}>
-                            <Linkedin size={28} />
+                        <a href="https://www.linkedin.com/in/rohit-wankhede-7a0b2b257" target="_blank" rel="noreferrer" className="text-white-50 d-inline-block hover-scale" style={{ transition: "all 0.3s ease" }} onMouseEnter={(e) => { e.currentTarget.style.color = '#ffffff'; e.currentTarget.style.transform = 'scale(1.1)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; e.currentTarget.style.transform = 'scale(1)'; }}>
+                            <Linkedin size={26} />
                         </a>
                     </p>
                 </div>
