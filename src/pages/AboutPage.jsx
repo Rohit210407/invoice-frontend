@@ -30,7 +30,7 @@ const AboutPage = () => {
           }}>
             About SmartInvoice
           </h1>
-          <p className="lead fs-5" style={{ color: "#9ca3af", maxWidth: "600px", margin: "0 auto" }}>
+          <p className="lead fs-5" style={{ color: "#d1d5db", maxWidth: "600px", margin: "0 auto" }}>
             Your all-in-one platform for professional invoicing and financial tracking.
           </p>
         </div>
@@ -42,10 +42,10 @@ const AboutPage = () => {
               Next-Gen Invoicing
             </div>
             <h2 className="h2 fw-bold mb-4 text-white" style={{ letterSpacing: "-0.5px" }}>What is SmartInvoice?</h2>
-            <p className="fs-6 text-secondary mb-4" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "1.1rem" }}>
+            <p className="fs-6 text-secondary mb-4" style={{ color: "#d1d5db", lineHeight: "1.8", fontSize: "1.1rem" }}>
               SmartInvoice is a modern, cloud-based B2B SaaS platform designed specifically for freelancers, agencies, and small to medium-sized enterprises (SMEs). We eliminate the hassle of spreadsheets and manual calculations by providing an intuitive interface to generate, track, and manage your invoices.
             </p>
-            <p className="fs-6 text-secondary" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "1.1rem" }}>
+            <p className="fs-6 text-secondary" style={{ color: "#d1d5db", lineHeight: "1.8", fontSize: "1.1rem" }}>
               Our goal is to help you get paid faster, maintain a professional image with your clients, and keep your finances organized in one secure place.
             </p>
           </div>
@@ -75,7 +75,7 @@ const AboutPage = () => {
                 <div>
                   <div className="about-step-badge step-1">1</div>
                   <h4 className="fw-bold text-white mb-3">Create</h4>
-                  <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "15.5px" }}>
+                  <p className="mb-0" style={{ color: "#e5e7eb", lineHeight: "1.8", fontSize: "15.5px" }}>
                     Enter your client's details, itemize your services or products, and apply any necessary taxes or discounts instantly.
                   </p>
                 </div>
@@ -86,7 +86,7 @@ const AboutPage = () => {
                 <div>
                   <div className="about-step-badge step-2">2</div>
                   <h4 className="fw-bold text-white mb-3">Customize</h4>
-                  <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "15.5px" }}>
+                  <p className="mb-0" style={{ color: "#e5e7eb", lineHeight: "1.8", fontSize: "15.5px" }}>
                     Choose from our gallery of professional templates. Add your company logo and select your brand's theme color.
                   </p>
                 </div>
@@ -97,7 +97,7 @@ const AboutPage = () => {
                 <div>
                   <div className="about-step-badge step-3">3</div>
                   <h4 className="fw-bold text-white mb-3">Send & Get Paid</h4>
-                  <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.8", fontSize: "15.5px" }}>
+                  <p className="mb-0" style={{ color: "#e5e7eb", lineHeight: "1.8", fontSize: "15.5px" }}>
                     Generate a secure Stripe payment link, save the invoice to your dashboard, and email it directly to your client.
                   </p>
                 </div>
@@ -123,7 +123,7 @@ const AboutPage = () => {
                   <Zap size={26} />
                 </div>
                 <h5 className="fw-bold text-white mb-3">Instant Payment Links</h5>
-                <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.7", fontSize: "15px" }}>
+                <p className="mb-0" style={{ color: "#d1d5db", lineHeight: "1.7", fontSize: "15px" }}>
                   Generate secure Stripe checkout links so clients can pay you instantly with credit cards or Apple Pay.
                 </p>
               </div>
@@ -134,7 +134,7 @@ const AboutPage = () => {
                   <BarChart size={26} />
                 </div>
                 <h5 className="fw-bold text-white mb-3">Analytics Dashboard</h5>
-                <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.7", fontSize: "15px" }}>
+                <p className="mb-0" style={{ color: "#d1d5db", lineHeight: "1.7", fontSize: "15px" }}>
                   Track your total revenue, outstanding balances, and view interactive charts of your cash flow over time.
                 </p>
               </div>
@@ -145,7 +145,7 @@ const AboutPage = () => {
                   <CheckCircle size={26} />
                 </div>
                 <h5 className="fw-bold text-white mb-3">Status Tracking</h5>
-                <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.7", fontSize: "15px" }}>
+                <p className="mb-0" style={{ color: "#d1d5db", lineHeight: "1.7", fontSize: "15px" }}>
                   Never lose track of an invoice. Mark invoices as Draft, Sent, Paid, or Overdue with color-coded badges.
                 </p>
               </div>
@@ -156,7 +156,7 @@ const AboutPage = () => {
                   <Smartphone size={26} />
                 </div>
                 <h5 className="fw-bold text-white mb-3">PDF Generation</h5>
-                <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.7", fontSize: "15px" }}>
+                <p className="mb-0" style={{ color: "#d1d5db", lineHeight: "1.7", fontSize: "15px" }}>
                   Download pixel-perfect, high-resolution PDF copies of your invoices for your own accounting records.
                 </p>
               </div>
@@ -167,7 +167,7 @@ const AboutPage = () => {
                   <Shield size={26} />
                 </div>
                 <h5 className="fw-bold text-white mb-3">Secure Cloud Storage</h5>
-                <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.7", fontSize: "15px" }}>
+                <p className="mb-0" style={{ color: "#d1d5db", lineHeight: "1.7", fontSize: "15px" }}>
                   All your invoice data is securely encrypted and backed up in the cloud. Access it anywhere, anytime.
                 </p>
               </div>
@@ -178,7 +178,7 @@ const AboutPage = () => {
                   <Globe size={26} />
                 </div>
                 <h5 className="fw-bold text-white mb-3">Custom Branding</h5>
-                <p className="mb-0" style={{ color: "#9ca3af", lineHeight: "1.7", fontSize: "15px" }}>
+                <p className="mb-0" style={{ color: "#d1d5db", lineHeight: "1.7", fontSize: "15px" }}>
                   White-label your invoices by uploading your custom logo and selecting your company's exact brand color.
                 </p>
               </div>

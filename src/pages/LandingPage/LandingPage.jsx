@@ -73,7 +73,7 @@ const LandingPage = () => {
                             Workflow
                         </div>
                         <h2 className="text-center mb-3 display-5 fw-bold text-white" style={{ letterSpacing: "-1px" }}>Get Started in 4 Simple Steps</h2>
-                        <p className="text-muted fs-6 mx-auto" style={{ maxWidth: "550px" }}>
+                        <p className="fs-6 mx-auto" style={{ color: "#d1d5db", maxWidth: "550px" }}>
                             SmartInvoice streamlines your billing operations. Go from draft to paid statement in seconds.
                         </p>
                     </div>
@@ -169,7 +169,7 @@ const LandingPage = () => {
                                 Custom Branding
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Easy to fill invoice details</h3>
-                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#d1d5db", lineHeight: "1.7" }}>
                                 SmartInvoice provides standard data structures that auto-populate default business headers, tax ratios, currencies, and translation properties instantly. No manual typing required.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -199,7 +199,7 @@ const LandingPage = () => {
                                 Live Insights
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Beautiful Dashboard</h3>
-                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#d1d5db", lineHeight: "1.7" }}>
                                 Gain full financial clarity using automated analytical widgets. View outstanding statements, track unpaid accounts, and auto-convert currencies in one place.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -230,7 +230,7 @@ const LandingPage = () => {
                                 Live Editor
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Invoice Preview with Action Buttons</h3>
-                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#d1d5db", lineHeight: "1.7" }}>
                                 What you see is exactly what your client gets. View your fully formatted live templates side-by-side with your input configurations instantly.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -260,7 +260,7 @@ const LandingPage = () => {
                                 Direct Dispatch
                             </div>
                             <h3 className="fw-bold text-white mb-3 h2" style={{ letterSpacing: "-0.5px" }}>Send invoices instantly</h3>
-                            <p className="lead fs-5 mb-4" style={{ color: "#9ca3af", lineHeight: "1.7" }}>
+                            <p className="lead fs-5 mb-4" style={{ color: "#d1d5db", lineHeight: "1.7" }}>
                                 Deliver billing statements securely and instantly to clients. Connect email services to send PDF structures or automated checkout statements smoothly.
                             </p>
                             <div className="d-flex flex-column gap-2">
@@ -277,7 +277,7 @@ const LandingPage = () => {
             <section id="generate-invoice" className="py-5 text-center landing-cta-premium text-white">
                 <div className="container py-5">
                     <h2 className="display-4 fw-bold mb-3 text-white" style={{ letterSpacing: "-1px" }}>Ready to Streamline Your Invoicing?</h2>
-                    <p className="lead mb-5 mx-auto" style={{ maxWidth: '600px', color: '#9ca3af', fontSize: '1.15rem', lineHeight: '1.7' }}>
+                    <p className="lead mb-5 mx-auto" style={{ maxWidth: '600px', color: '#e5e7eb', fontSize: '1.15rem', lineHeight: '1.7' }}>
                         Join thousands of freelancers and small businesses who trust SmartInvoice.
                         Start creating professional invoices today – its fast, easy, and effective!
                     </p>
